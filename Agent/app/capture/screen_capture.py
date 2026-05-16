@@ -11,12 +11,10 @@ from __future__ import annotations
 import asyncio
 import uuid
 from datetime import datetime
-from io import BytesIO
 
 import mss
 import numpy as np
 from loguru import logger
-from PIL import Image
 
 from Agent.config import settings
 from Agent.models.schemas import ScreenshotMeta
@@ -76,26 +74,60 @@ class ScreenCapture:
 
     def _take_screenshot(self) -> tuple[ScreenshotMeta, np.ndarray]:
         """
-        Captura a tela e retorna (meta, array numpy BGR).
-        Nenhum arquivo é escrito em disco.
+        Captura todos os monitores conectados dinamicamente e os concatena
+        em um único array numpy BGR. Nenhum arquivo é escrito em disco.
+
+        sct.monitors[0]  → bounding box virtual de todos os monitors (pode
+                           ter offsets negativos em configs multi-monitor)
+        sct.monitors[1:] → cada monitor físico individualmente
+
+        Recria o contexto mss a cada chamada para detectar mudanças de
+        resolução ou monitores plugados/desplugados em tempo real.
         """
         shot_id = str(uuid.uuid4())
         timestamp = datetime.utcnow()
 
         with mss.mss() as sct:
-            monitor = sct.monitors[0]       # monitor principal
-            raw = sct.grab(monitor)
-            # Converte para array numpy BGR (compatível com OpenCV/EasyOCR)
-            image_array = np.array(raw)     # formato BGRA
-            image_array = image_array[:, :, :3]  # descarta canal alpha → BGR
+            monitors = sct.monitors[1:]     # ignora [0] (virtual combinado)
+
+            if not monitors:
+                # fallback: usa o combinado se não houver monitores individuais
+                monitors = [sct.monitors[0]]
+
+            frames: list[np.ndarray] = []
+            for mon in monitors:
+                raw = sct.grab(mon)
+                frame = np.array(raw)[:, :, :3]   # BGRA → BGR
+                frames.append(frame)
+
+            # Concatena os monitores lado a lado (horizontal)
+            # Se tiverem alturas diferentes, redimensiona para a maior
+            if len(frames) > 1:
+                max_h = max(f.shape[0] for f in frames)
+                padded = []
+                for f in frames:
+                    if f.shape[0] < max_h:
+                        pad = np.zeros((max_h - f.shape[0], f.shape[1], 3), dtype=f.dtype)
+                        f = np.vstack([f, pad])
+                    padded.append(f)
+                image_array = np.hstack(padded)
+            else:
+                image_array = frames[0]
+
+        total_w = image_array.shape[1]
+        total_h = image_array.shape[0]
+
+        logger.debug(
+            "Captura em memória: {} | {} monitor(es) | {}x{}",
+            shot_id[:8], len(monitors), total_w, total_h,
+        )
 
         meta = ScreenshotMeta(
             id=shot_id,
             captured_at=timestamp,
-            width=raw.width,
-            height=raw.height,
+            width=total_w,
+            height=total_h,
         )
-        logger.debug("Captura em memória: {} ({}x{})", shot_id[:8], raw.width, raw.height)
         return meta, image_array
 
     # ------------------------------------------------------------------
