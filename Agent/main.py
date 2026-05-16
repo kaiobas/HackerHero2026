@@ -19,9 +19,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 
-from Agent.app.api.routes import router
-from Agent.app.guardian import GuardianOrchestrator
-from Agent.config import settings
+from app.api.routes import router
+from app.guardian import GuardianOrchestrator
+from config import settings
 
 # ---------------------------------------------------------------------------
 # Logging

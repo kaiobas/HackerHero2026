@@ -18,8 +18,8 @@ import tkinter as tk
 
 from loguru import logger
 
-from Agent.config import settings
-from Agent.models.schemas import ProtectionAction, ProtectionState, RiskAssessment, RiskLevel
+from config import settings
+from models.schemas import ProtectionAction, ProtectionState, RiskAssessment, RiskLevel
 
 
 class OverlayProtection:

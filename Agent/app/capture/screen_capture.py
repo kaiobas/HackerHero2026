@@ -16,8 +16,8 @@ import mss
 import numpy as np
 from loguru import logger
 
-from Agent.config import settings
-from Agent.models.schemas import ScreenshotMeta
+from config import settings
+from models.schemas import ScreenshotMeta
 
 
 class ScreenCapture:

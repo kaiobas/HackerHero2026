@@ -18,8 +18,8 @@ from datetime import datetime
 
 from loguru import logger
 
-from Agent.config import settings
-from Agent.models.schemas import (
+from config import settings
+from models.schemas import (
     ExtractedText,
     RiskAssessment,
     RiskLevel,

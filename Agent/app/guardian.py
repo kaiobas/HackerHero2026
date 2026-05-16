@@ -17,13 +17,13 @@ from datetime import datetime
 import numpy as np
 from loguru import logger
 
-from Agent.app.ai.pattern_agent import PatternAgent
-from Agent.app.capture.screen_capture import ScreenCapture
-from Agent.app.ocr.text_extractor import TextExtractor
-from Agent.app.protection.overlay import OverlayProtection
-from Agent.app.risk.risk_engine import RiskEngine
-from Agent.config import settings
-from Agent.models.schemas import (
+from app.ai.pattern_agent import PatternAgent
+from app.capture.screen_capture import ScreenCapture
+from app.ocr.text_extractor import TextExtractor
+from app.protection.overlay import OverlayProtection
+from app.risk.risk_engine import RiskEngine
+from config import settings
+from models.schemas import (
     Alert,
     ExtractedText,
     RiskAssessment,
@@ -129,7 +129,7 @@ class GuardianOrchestrator:
                 if self.screenshot_history and self.latest_risk:
                     last_meta = self.screenshot_history[-1]
                     # Re-avalia usando o último texto (sem nova captura de tela)
-                    from Agent.models.schemas import ExtractedText as ET
+                    from models.schemas import ExtractedText as ET
                     from datetime import datetime as dt
                     dummy_extracted = ET(
                         screenshot_id=last_meta.id,

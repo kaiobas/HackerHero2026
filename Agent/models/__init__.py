@@ -1,1 +1,1 @@
-from Agent.models.schemas import *  # noqa: F401, F403
+from models.schemas import *  # noqa: F401, F403
