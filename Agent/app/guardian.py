@@ -14,16 +14,17 @@ import uuid
 from collections import deque
 from datetime import datetime
 
+import httpx
 import numpy as np
 from loguru import logger
 
-from Agent.app.ai.pattern_agent import PatternAgent
-from Agent.app.capture.screen_capture import ScreenCapture
-from Agent.app.ocr.text_extractor import TextExtractor
-from Agent.app.protection.overlay import OverlayProtection
-from Agent.app.risk.risk_engine import RiskEngine
-from Agent.config import settings
-from Agent.models.schemas import (
+from app.ai.pattern_agent import PatternAgent
+from app.capture.screen_capture import ScreenCapture
+from app.ocr.text_extractor import TextExtractor
+from app.protection.overlay import OverlayProtection
+from app.risk.risk_engine import RiskEngine
+from config import settings
+from models.schemas import (
     Alert,
     ExtractedText,
     RiskAssessment,
@@ -78,6 +79,7 @@ class GuardianOrchestrator:
         await self.capture.stop()
         if self._ai_task:
             self._ai_task.cancel()
+        await self.agent.close()
         self.overlay.stop()
         logger.info("Guardian parado.")
 
@@ -96,58 +98,56 @@ class GuardianOrchestrator:
         if extracted.raw_text.strip():
             self.text_history.append(extracted.raw_text)
 
-        # 2. Avaliação de risco com léxico (sem IA – rápido)
-        assessment = self.risk_engine.assess(extracted)
+        # 2. Camada 1 — filtro léxico rápido
+        layer1 = self.risk_engine.run_layer1(extracted.raw_text)
+
+        if not layer1.suspicious:
+            # Nenhum padrão suspeito: pipeline para aqui, sem chamar a IA
+            return
+
+        # 3. Camada 1 detectou algo — avalia score L1 imediatamente
+        assessment = self.risk_engine.assess(extracted, ai_score=0, layer1=layer1)
         self.latest_risk = assessment
 
-        # 3. Acionar proteção visual (overlay decide prioridade RED > YELLOW)
+        # 4. Acionar proteção preventiva enquanto aguarda IA
         if assessment.level != RiskLevel.GREEN:
             self.overlay.apply(assessment)
             await self._create_alert(assessment)
+
+        # 5. Camada 2 — IA (Ollama) confirma ou descarta o risco
+        try:
+            texts_window = list(self.text_history)
+            ai_result = await self.agent.analyze(texts_window)
+
+            combined = self.risk_engine.assess(
+                extracted, ai_score=ai_result.score, layer1=layer1
+            )
+            self.latest_risk = combined
+
+            if combined.level != RiskLevel.GREEN:
+                self.overlay.apply(combined)
+                await self._create_alert(combined)
+            else:
+                # IA descartou: libera overlay se estava ativado por falso-positivo
+                self.overlay.release()
+        except Exception as exc:
+            logger.error("Erro na Camada 2 (Ollama): {}", exc)
 
     # ------------------------------------------------------------------
     # Loop do Agente de IA (periódico, mais lento)
     # ------------------------------------------------------------------
 
     async def _ai_loop(self) -> None:
+        """Loop de manutenção — mantém a conexão Ollama aquecida a cada 5 min."""
         while self.running:
-            await asyncio.sleep(settings.ai_analysis_interval_seconds)
+            await asyncio.sleep(300)
             try:
-                texts = list(self.text_history)
-                if not texts:
-                    continue
-
-                ai_result = await self.agent.analyze(texts)
-                logger.info(
-                    "🤖 IA | Score: {} | Nível: {} | {}",
-                    ai_result.score,
-                    ai_result.risk_level.value.upper(),
-                    ai_result.summary[:80],
-                )
-
-                # Re-avalia o último screenshot combinando com score da IA
-                if self.screenshot_history and self.latest_risk:
-                    last_meta = self.screenshot_history[-1]
-                    # Re-avalia usando o último texto (sem nova captura de tela)
-                    from Agent.models.schemas import ExtractedText as ET
-                    from datetime import datetime as dt
-                    dummy_extracted = ET(
-                        screenshot_id=last_meta.id,
-                        raw_text=" ".join(list(self.text_history)[-3:]),
-                        confidence=1.0,
-                        extracted_at=dt.utcnow(),
-                    )
-                    combined = self.risk_engine.assess(dummy_extracted, ai_score=ai_result.score)
-                    self.latest_risk = combined
-
-                    if combined.level != RiskLevel.GREEN:
-                        self.overlay.apply(combined)
-                        await self._create_alert(combined)
-
+                async with httpx.AsyncClient(timeout=5) as c:
+                    await c.get("http://localhost:11434/api/tags")
+            except Exception:
+                logger.warning("⚠️  Ollama não está respondendo em localhost:11434")
             except asyncio.CancelledError:
                 break
-            except Exception as exc:
-                logger.error("Erro no loop de IA: {}", exc)
 
     # ------------------------------------------------------------------
     # Alertas

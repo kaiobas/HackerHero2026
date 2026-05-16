@@ -1,3 +1,3 @@
-from Agent.app.guardian import GuardianOrchestrator
+from app.guardian import GuardianOrchestrator
 
 __all__ = ["GuardianOrchestrator"]

@@ -37,11 +37,14 @@ class Settings(BaseSettings):
     risk_yellow_threshold: int = 40
     risk_red_threshold: int = 70
 
-    # --- Agente de IA ---
-    openai_api_key: str = ""
-    openai_model: str = "gpt-4o-mini"
-    ai_analysis_interval_seconds: int = 30    # análise IA a cada N segundos
-    ai_context_window: int = 10               # número de capturas enviadas ao agente
+    # --- Agente de IA (Ollama local) ---
+    # Instale em: https://ollama.com/download
+    # Execute:    ollama serve  &&  ollama pull qwen2.5:7b
+    ollama_model: str = "qwen2.5:7b"
+    ollama_url: str = "http://localhost:11434"
+    ai_context_window: int = 10               # textos recentes enviados à IA (Camada 2)
+
+    ai_analysis_interval_seconds: int = 30
 
     # --- Notificações ---
     alert_email: str = ""                     # e-mail dos pais (opcional)

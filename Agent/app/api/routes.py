@@ -21,8 +21,8 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 
-from Agent.config import settings
-from Agent.models.schemas import (
+from config import settings
+from models.schemas import (
     Alert,
     ProtectionState,
     RiskAssessment,
