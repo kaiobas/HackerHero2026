@@ -16,8 +16,8 @@ import cv2
 import numpy as np
 from loguru import logger
 
-from config import settings
-from models.schemas import ExtractedText, ScreenshotMeta
+from Agent.config import settings
+from Agent.models.schemas import ExtractedText, ScreenshotMeta
 
 # EasyOCR importado com tratamento de ausência de GPU
 try:

@@ -18,8 +18,8 @@ import numpy as np
 from loguru import logger
 from PIL import Image
 
-from config import settings
-from models.schemas import ScreenshotMeta
+from Agent.config import settings
+from Agent.models.schemas import ScreenshotMeta
 
 
 class ScreenCapture:

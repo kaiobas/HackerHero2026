@@ -21,8 +21,8 @@ from typing import Any
 
 from loguru import logger
 
-from config import settings
-from models.schemas import AIAnalysisResult, RiskLevel
+from Agent.config import settings
+from Agent.models.schemas import AIAnalysisResult, RiskLevel
 
 # ---------------------------------------------------------------------------
 # System Prompt do Agente
