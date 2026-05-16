@@ -1,0 +1,35 @@
+# === Core ===
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.7.0
+pydantic-settings>=2.2.0
+
+# === Screen Capture ===
+mss>=9.0.1
+Pillow>=10.3.0
+
+# === OCR ===
+easyocr>=1.7.1
+opencv-python>=4.9.0.80
+numpy>=1.26.0
+
+# === AI Agent ===
+openai>=1.30.0
+langchain>=0.2.0
+langchain-openai>=0.1.8
+langchain-community>=0.2.0
+
+# === Windows Overlay / System ===
+pywin32>=306; sys_platform == "win32"
+keyboard>=0.13.5
+psutil>=5.9.8
+
+# === Persistence ===
+sqlalchemy>=2.0.30
+aiosqlite>=0.20.0
+
+# === Utilities ===
+python-dotenv>=1.0.1
+loguru>=0.7.2
+apscheduler>=3.10.4
+httpx>=0.27.0
