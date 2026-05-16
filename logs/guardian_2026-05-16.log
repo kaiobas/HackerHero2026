@@ -1,0 +1,521 @@
+2026-05-16 02:27:35.192 | INFO     | Agent.app.capture.screen_capture:start:42 - ScreenCapture iniciado – intervalo: 5s (modo privado: sem disco)
+2026-05-16 02:27:35.194 | SUCCESS  | Agent.app.guardian:start:74 - 🛡️  Guardian iniciado.
+2026-05-16 02:27:35.195 | SUCCESS  | main:lifespan:54 - ✅ HackerHero Guardian v1.0.0 rodando em http://127.0.0.1:8000
+2026-05-16 02:27:35.258 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: b7a3f90f (1920x1200)
+2026-05-16 02:27:36.222 | INFO     | Agent.app.ocr.text_extractor:_get_reader:45 - Inicializando EasyOCR (idiomas: ['pt', 'en'], GPU: False) …
+2026-05-16 02:27:54.391 | INFO     | Agent.app.ocr.text_extractor:_get_reader:55 - EasyOCR pronto.
+2026-05-16 02:28:10.482 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [b7a3f90f] – 45 palavras, confiança média: 0.68
+2026-05-16 02:28:10.484 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b7a3f90f] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:28:15.552 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 14c4fbb8 (1920x1200)
+2026-05-16 02:28:34.509 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [14c4fbb8] – 73 palavras, confiança média: 0.68
+2026-05-16 02:28:34.511 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [14c4fbb8] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:28:39.563 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: f7af291b (1920x1200)
+2026-05-16 02:28:42.643 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 25 | Nível: GREEN | As conversas parecem estar focadas em discussões sobre proteção e prevenção de v
+2026-05-16 02:28:42.647 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [f7af291b] | Score: 10 | Nível: GREEN | Sinais: 0
+2026-05-16 02:28:56.471 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [f7af291b] – 68 palavras, confiança média: 0.72
+2026-05-16 02:28:56.473 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [f7af291b] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:29:01.511 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 9a35e891 (1920x1200)
+2026-05-16 02:29:16.289 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 25 | Nível: GREEN | Os trechos analisados discutem ideias para um hackathon focado na prevenção da v
+2026-05-16 02:29:16.292 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [9a35e891] | Score: 10 | Nível: GREEN | Sinais: 0
+2026-05-16 02:29:17.993 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [9a35e891] – 58 palavras, confiança média: 0.70
+2026-05-16 02:29:17.995 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [9a35e891] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:29:23.047 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: c01899cd (1920x1200)
+2026-05-16 02:29:40.096 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [c01899cd] – 57 palavras, confiança média: 0.73
+2026-05-16 02:29:40.099 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [c01899cd] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:29:45.164 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: d533f928 (1920x1200)
+2026-05-16 02:29:49.849 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 20 | Nível: GREEN | As conversas parecem estar focadas em um hackathon sobre prevenção de violência 
+2026-05-16 02:29:49.855 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [d533f928] | Score: 8 | Nível: GREEN | Sinais: 0
+2026-05-16 02:29:59.813 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [d533f928] – 61 palavras, confiança média: 0.73
+2026-05-16 02:29:59.815 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [d533f928] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:30:04.860 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: c1ea279e (1920x1200)
+2026-05-16 02:30:21.639 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [c1ea279e] – 64 palavras, confiança média: 0.74
+2026-05-16 02:30:21.641 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [c1ea279e] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:30:24.194 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 20 | Nível: GREEN | As conversas parecem estar focadas em discussões sobre proteção digital e desenv
+2026-05-16 02:30:24.197 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [c1ea279e] | Score: 20 | Nível: GREEN | Sinais: 1
+2026-05-16 02:30:26.693 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: e24ac1e8 (1920x1200)
+2026-05-16 02:30:43.455 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [e24ac1e8] – 60 palavras, confiança média: 0.73
+2026-05-16 02:30:43.458 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [e24ac1e8] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:30:48.509 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: ecfa7cd8 (1920x1200)
+2026-05-16 02:30:56.829 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 20 | Nível: GREEN | Os trechos analisados discutem ideias para um hackathon focado na prevenção de v
+2026-05-16 02:30:56.834 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [ecfa7cd8] | Score: 20 | Nível: GREEN | Sinais: 1
+2026-05-16 02:31:05.874 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [ecfa7cd8] – 63 palavras, confiança média: 0.72
+2026-05-16 02:31:05.877 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [ecfa7cd8] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:31:10.951 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 475a768a (1920x1200)
+2026-05-16 02:31:27.402 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [475a768a] – 53 palavras, confiança média: 0.67
+2026-05-16 02:31:27.405 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [475a768a] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:31:29.426 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 20 | Nível: GREEN | Os trechos analisados discutem ideias para um hackathon focado na prevenção da v
+2026-05-16 02:31:29.429 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [475a768a] | Score: 8 | Nível: GREEN | Sinais: 0
+2026-05-16 02:31:32.487 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 1ccff70b (1920x1200)
+2026-05-16 02:31:51.786 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [1ccff70b] – 97 palavras, confiança média: 0.63
+2026-05-16 02:31:51.789 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [1ccff70b] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:31:56.846 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 56215274 (1920x1200)
+2026-05-16 02:32:01.193 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | As conversas analisadas são sobre prevenção de violência sexual digital e segura
+2026-05-16 02:32:01.197 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [56215274] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:32:16.114 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [56215274] – 110 palavras, confiança média: 0.65
+2026-05-16 02:32:16.117 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [56215274] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:32:21.174 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 3f75528f (1920x1200)
+2026-05-16 02:32:33.630 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | As conversas analisadas referem-se a discussões sobre segurança digital e desenv
+2026-05-16 02:32:33.634 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [3f75528f] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:32:39.260 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [3f75528f] – 98 palavras, confiança média: 0.61
+2026-05-16 02:32:39.263 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [3f75528f] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:32:44.309 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: e0048088 (1920x1200)
+2026-05-16 02:33:00.234 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [e0048088] – 82 palavras, confiança média: 0.65
+2026-05-16 02:33:00.236 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [e0048088] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:33:04.916 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | Os trechos analisados contêm discussões sobre proteção digital e prevenção de vi
+2026-05-16 02:33:04.920 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [e0048088] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:33:05.298 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 2005c11c (1920x1200)
+2026-05-16 02:33:23.083 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [2005c11c] – 111 palavras, confiança média: 0.67
+2026-05-16 02:33:23.085 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [2005c11c] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:33:28.122 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: db320421 (1920x1200)
+2026-05-16 02:33:36.554 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | Os trechos analisados contêm discussões técnicas e referências a aplicativos de 
+2026-05-16 02:33:36.558 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [db320421] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:33:48.221 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [db320421] – 123 palavras, confiança média: 0.67
+2026-05-16 02:33:48.224 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [db320421] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:33:53.272 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 82d049b7 (1920x1200)
+2026-05-16 02:34:08.433 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | Os trechos analisados contêm discussões sobre segurança digital e prevenção de v
+2026-05-16 02:34:08.437 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [82d049b7] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:34:13.422 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [82d049b7] – 119 palavras, confiança média: 0.64
+2026-05-16 02:34:13.425 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [82d049b7] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:34:18.486 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: e337f030 (1920x1200)
+2026-05-16 02:34:38.108 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [e337f030] – 113 palavras, confiança média: 0.65
+2026-05-16 02:34:38.111 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [e337f030] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:34:39.864 | INFO     | Agent.app.capture.screen_capture:start:42 - ScreenCapture iniciado – intervalo: 5s (modo privado: sem disco)
+2026-05-16 02:34:39.866 | SUCCESS  | Agent.app.guardian:start:74 - 🛡️  Guardian iniciado.
+2026-05-16 02:34:39.866 | SUCCESS  | main:lifespan:54 - ✅ HackerHero Guardian v1.0.0 rodando em http://127.0.0.1:8000
+2026-05-16 02:34:39.869 | INFO     | Agent.app.capture.screen_capture:stop:55 - ScreenCapture parado.
+2026-05-16 02:34:39.904 | INFO     | Agent.app.guardian:stop:82 - Guardian parado.
+2026-05-16 02:34:39.905 | INFO     | main:lifespan:60 - Servidor encerrado.
+2026-05-16 02:34:39.939 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 5ca3dbec (1920x1200)
+2026-05-16 02:34:40.311 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | Os trechos analisados contêm discussões técnicas sobre desenvolvimento de softwa
+2026-05-16 02:34:40.316 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [e337f030] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:34:43.171 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: b183cc1a (1920x1200)
+2026-05-16 02:35:04.209 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [b183cc1a] – 145 palavras, confiança média: 0.67
+2026-05-16 02:35:04.212 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b183cc1a] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:35:09.269 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: b152c4c8 (1920x1200)
+2026-05-16 02:35:12.350 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | Os trechos analisados contêm discussões técnicas sobre programação e desenvolvim
+2026-05-16 02:35:12.356 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b152c4c8] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:35:30.819 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [b152c4c8] – 154 palavras, confiança média: 0.66
+2026-05-16 02:35:30.822 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b152c4c8] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:35:35.867 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: f95ae866 (1920x1200)
+2026-05-16 02:35:44.952 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | As conversas analisadas são de natureza técnica e relacionadas ao desenvolviment
+2026-05-16 02:35:44.960 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [f95ae866] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:35:56.790 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [f95ae866] – 124 palavras, confiança média: 0.63
+2026-05-16 02:35:56.792 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [f95ae866] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:36:27.006 | INFO     | Agent.app.capture.screen_capture:start:42 - ScreenCapture iniciado – intervalo: 5s (modo privado: sem disco)
+2026-05-16 02:36:27.008 | SUCCESS  | Agent.app.guardian:start:74 - 🛡️  Guardian iniciado.
+2026-05-16 02:36:27.008 | SUCCESS  | main:lifespan:54 - ✅ HackerHero Guardian v1.0.0 rodando em http://127.0.0.1:8000
+2026-05-16 02:36:27.066 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 9bdcf35c (1920x1200)
+2026-05-16 02:36:27.944 | INFO     | Agent.app.ocr.text_extractor:_get_reader:45 - Inicializando EasyOCR (idiomas: ['pt', 'en'], GPU: False) …
+2026-05-16 02:36:30.996 | INFO     | Agent.app.ocr.text_extractor:_get_reader:55 - EasyOCR pronto.
+2026-05-16 02:36:49.395 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [9bdcf35c] – 107 palavras, confiança média: 0.65
+2026-05-16 02:36:49.398 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [9bdcf35c] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:36:54.446 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: e2423197 (1920x1200)
+2026-05-16 02:37:02.316 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | O trecho analisado parece ser uma conversa técnica relacionada ao desenvolviment
+2026-05-16 02:37:02.320 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [e2423197] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:37:15.842 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [e2423197] – 140 palavras, confiança média: 0.64
+2026-05-16 02:37:15.845 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [e2423197] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:37:20.899 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 16cb736d (1920x1200)
+2026-05-16 02:37:34.287 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | As conversas parecem ser relacionadas a programação e desenvolvimento de softwar
+2026-05-16 02:37:34.292 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [16cb736d] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:37:35.334 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [16cb736d] – 47 palavras, confiança média: 0.76
+2026-05-16 02:37:35.335 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [16cb736d] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:37:40.402 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 5c217e21 (1920x1200)
+2026-05-16 02:37:59.404 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [5c217e21] – 83 palavras, confiança média: 0.64
+2026-05-16 02:37:59.406 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [5c217e21] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:38:04.450 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 3cb8770c (1920x1200)
+2026-05-16 02:38:06.913 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | Os trechos contêm indícios de tentativas de isolamento e migração para plataform
+2026-05-16 02:38:06.919 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [3cb8770c] | Score: 34 | Nível: GREEN | Sinais: 1
+2026-05-16 02:38:25.855 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [3cb8770c] – 87 palavras, confiança média: 0.62
+2026-05-16 02:38:25.859 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [3cb8770c] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:38:30.912 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 68f1c564 (1920x1200)
+2026-05-16 02:38:40.091 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | Os trechos contêm indícios claros de tentativas de isolamento e manipulação emoc
+2026-05-16 02:38:40.096 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [68f1c564] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 02:38:40.097 | WARNING  | Agent.app.guardian:_create_alert:171 - 🚨 Alerta criado: ff505d2b | Padrões suspeitos detectados (score 46/100). Categorias: contato_externo. Monitoramento intensificado.
+2026-05-16 02:38:56.257 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [68f1c564] – 181 palavras, confiança média: 0.70
+2026-05-16 02:38:56.260 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [68f1c564] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:39:01.314 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 3cf2f3d9 (1920x1200)
+2026-05-16 02:39:13.094 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | Os trechos contêm indícios de tentativas de isolamento e migração para plataform
+2026-05-16 02:39:13.100 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [3cf2f3d9] | Score: 34 | Nível: GREEN | Sinais: 1
+2026-05-16 02:39:18.494 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [3cf2f3d9] – 70 palavras, confiança média: 0.71
+2026-05-16 02:39:18.497 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [3cf2f3d9] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:39:23.542 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: eaf91e08 (1920x1200)
+2026-05-16 02:39:41.085 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [eaf91e08] – 73 palavras, confiança média: 0.69
+2026-05-16 02:39:41.087 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [eaf91e08] | Score: 31 | Nível: GREEN | Sinais: 2
+2026-05-16 02:39:45.422 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | Os trechos contêm tentativas de isolamento, migração para plataformas privadas e
+2026-05-16 02:39:45.426 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [eaf91e08] | Score: 65 | Nível: YELLOW | Sinais: 2
+2026-05-16 02:39:46.142 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: dd65ad24 (1920x1200)
+2026-05-16 02:40:03.049 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [dd65ad24] – 76 palavras, confiança média: 0.70
+2026-05-16 02:40:03.050 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [dd65ad24] | Score: 27 | Nível: GREEN | Sinais: 2
+2026-05-16 02:40:08.119 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 7b9b6c40 (1920x1200)
+2026-05-16 02:40:19.099 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | Os trechos contêm indícios claros de tentativas de isolamento, migração para pla
+2026-05-16 02:40:19.103 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [7b9b6c40] | Score: 82 | Nível: RED | Sinais: 3
+2026-05-16 02:40:19.105 | WARNING  | Agent.app.guardian:_create_alert:171 - 🚨 Alerta criado: 85c3eaf4 | 🚨 RISCO ALTO (score 82/100). Categorias: sexual, dados_pessoais, contato_externo. Tela bloqueada. Responsável notificado.
+2026-05-16 02:40:19.807 | WARNING  | Agent.app.protection.overlay:_show_quarantine_screen:353 - 🔴 QUARENTENA ativada – 🚨 RISCO ALTO (score 82/100). Categorias: sexual, dados_pessoais, contato_externo. Tela bloqueada. Responsável notificado.
+2026-05-16 02:40:25.060 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [7b9b6c40] – 69 palavras, confiança média: 0.65
+2026-05-16 02:40:25.063 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [7b9b6c40] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:40:30.113 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 6343c540 (1920x1200)
+2026-05-16 02:40:40.888 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [6343c540] – 37 palavras, confiança média: 0.62
+2026-05-16 02:40:40.889 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [6343c540] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:40:45.942 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 0fb75863 (1920x1200)
+2026-05-16 02:40:50.901 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | O trecho contém indícios de comportamento sexual e coleta de dados pessoais, alé
+2026-05-16 02:40:50.905 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [0fb75863] | Score: 60 | Nível: YELLOW | Sinais: 2
+2026-05-16 02:40:50.906 | WARNING  | Agent.app.guardian:_create_alert:171 - 🚨 Alerta criado: d4a49b64 | Padrões suspeitos detectados (score 60/100). Categorias: dados_pessoais, contato_externo. Monitoramento intensificado.
+2026-05-16 02:40:57.965 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [0fb75863] – 37 palavras, confiança média: 0.62
+2026-05-16 02:40:57.967 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [0fb75863] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:41:03.028 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 1ce5a980 (1920x1200)
+2026-05-16 02:41:18.399 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [1ce5a980] – 74 palavras, confiança média: 0.66
+2026-05-16 02:41:18.401 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [1ce5a980] | Score: 27 | Nível: GREEN | Sinais: 2
+2026-05-16 02:41:23.061 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Os trechos contêm indícios de comportamento sexual explícito e tentativas de col
+2026-05-16 02:41:23.063 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [1ce5a980] | Score: 60 | Nível: YELLOW | Sinais: 2
+2026-05-16 02:41:23.455 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: ad62139e (1920x1200)
+2026-05-16 02:41:51.044 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [ad62139e] – 187 palavras, confiança média: 0.69
+2026-05-16 02:41:51.048 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [ad62139e] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:41:56.109 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: ffd5b268 (1920x1200)
+2026-05-16 02:41:57.668 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Atividade suspeita detectada com indícios de comportamento sexual e coleta de da
+2026-05-16 02:41:57.672 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [ffd5b268] | Score: 60 | Nível: YELLOW | Sinais: 2
+2026-05-16 02:42:13.212 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [ffd5b268] – 70 palavras, confiança média: 0.65
+2026-05-16 02:42:13.214 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [ffd5b268] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:42:18.256 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 9190b749 (1920x1200)
+2026-05-16 02:42:29.557 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Atividade suspeita detectada com indícios de comportamento sexual e coleta de da
+2026-05-16 02:42:29.562 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [9190b749] | Score: 60 | Nível: YELLOW | Sinais: 2
+2026-05-16 02:42:35.175 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [9190b749] – 68 palavras, confiança média: 0.64
+2026-05-16 02:42:35.177 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [9190b749] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:42:40.240 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 284f94f9 (1920x1200)
+2026-05-16 02:42:57.041 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [284f94f9] – 66 palavras, confiança média: 0.63
+2026-05-16 02:42:57.043 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [284f94f9] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:43:01.752 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | O texto contém indícios de comportamento sexual explícito e tentativas de coleta
+2026-05-16 02:43:01.756 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [284f94f9] | Score: 44 | Nível: YELLOW | Sinais: 1
+2026-05-16 02:43:02.090 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 4c9599bf (1920x1200)
+2026-05-16 02:43:18.527 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [4c9599bf] – 65 palavras, confiança média: 0.65
+2026-05-16 02:43:18.529 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [4c9599bf] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:43:23.588 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 84b498dc (1920x1200)
+2026-05-16 02:43:33.642 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Detectado conteúdo sexual explícito e tentativas de contato externo. Há indícios
+2026-05-16 02:43:33.645 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [84b498dc] | Score: 44 | Nível: YELLOW | Sinais: 1
+2026-05-16 02:43:39.830 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [84b498dc] – 69 palavras, confiança média: 0.65
+2026-05-16 02:43:39.832 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [84b498dc] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:43:44.888 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: cf40c8f4 (1920x1200)
+2026-05-16 02:44:01.552 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [cf40c8f4] – 72 palavras, confiança média: 0.64
+2026-05-16 02:44:01.554 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [cf40c8f4] | Score: 27 | Nível: GREEN | Sinais: 2
+2026-05-16 02:44:06.362 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Os trechos contêm indícios de comportamento sexual explícito e tentativas de col
+2026-05-16 02:44:06.365 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [cf40c8f4] | Score: 60 | Nível: YELLOW | Sinais: 2
+2026-05-16 02:44:06.606 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: b39a8059 (1920x1200)
+2026-05-16 02:44:22.017 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [b39a8059] – 69 palavras, confiança média: 0.67
+2026-05-16 02:44:22.019 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b39a8059] | Score: 43 | Nível: YELLOW | Sinais: 3
+2026-05-16 02:44:27.073 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: dfd4526e (1920x1200)
+2026-05-16 02:44:37.909 | INFO     | Agent.app.capture.screen_capture:stop:55 - ScreenCapture parado.
+2026-05-16 02:44:37.909 | INFO     | Agent.app.guardian:stop:82 - Guardian parado.
+2026-05-16 02:44:37.910 | INFO     | main:lifespan:60 - Servidor encerrado.
+2026-05-16 02:44:41.724 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [dfd4526e] – 70 palavras, confiança média: 0.65
+2026-05-16 02:44:56.145 | INFO     | Agent.app.capture.screen_capture:start:42 - ScreenCapture iniciado – intervalo: 5s (modo privado: sem disco)
+2026-05-16 02:44:56.147 | SUCCESS  | Agent.app.guardian:start:74 - 🛡️  Guardian iniciado.
+2026-05-16 02:44:56.148 | SUCCESS  | main:lifespan:54 - ✅ HackerHero Guardian v1.0.0 rodando em http://127.0.0.1:8000
+2026-05-16 02:44:56.192 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 1d1e8f99 (1920x1200)
+2026-05-16 02:44:57.099 | INFO     | Agent.app.ocr.text_extractor:_get_reader:45 - Inicializando EasyOCR (idiomas: ['pt', 'en'], GPU: False) …
+2026-05-16 02:45:00.179 | INFO     | Agent.app.ocr.text_extractor:_get_reader:55 - EasyOCR pronto.
+2026-05-16 02:45:20.555 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [1d1e8f99] – 149 palavras, confiança média: 0.66
+2026-05-16 02:45:20.559 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [1d1e8f99] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:45:25.621 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 174202a3 (1920x1200)
+2026-05-16 02:45:31.489 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 27 | Nível: GREEN | As conversas parecem estar relacionadas a programação e desenvolvimento de softw
+2026-05-16 02:45:31.492 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [174202a3] | Score: 10 | Nível: GREEN | Sinais: 0
+2026-05-16 02:45:41.323 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [174202a3] – 67 palavras, confiança média: 0.61
+2026-05-16 02:45:41.325 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [174202a3] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:45:46.367 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: fc0d6f8a (1920x1200)
+2026-05-16 02:46:02.563 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [fc0d6f8a] – 69 palavras, confiança média: 0.60
+2026-05-16 02:46:02.565 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [fc0d6f8a] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:46:03.407 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O segundo trecho contém uma solicitação explícita de fotos nuas, o que é um comp
+2026-05-16 02:46:03.411 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [fc0d6f8a] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 02:46:03.411 | WARNING  | Agent.app.guardian:_create_alert:171 - 🚨 Alerta criado: 3584128a | Padrões suspeitos detectados (score 46/100). Categorias: contato_externo. Monitoramento intensificado.
+2026-05-16 02:46:07.614 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 5825cf67 (1920x1200)
+2026-05-16 02:46:23.605 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [5825cf67] – 70 palavras, confiança média: 0.63
+2026-05-16 02:46:23.607 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [5825cf67] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:46:28.645 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 191e8083 (1920x1200)
+2026-05-16 02:46:34.065 | INFO     | Agent.app.capture.screen_capture:stop:55 - ScreenCapture parado.
+2026-05-16 02:46:34.066 | INFO     | Agent.app.guardian:stop:82 - Guardian parado.
+2026-05-16 02:46:34.066 | INFO     | main:lifespan:60 - Servidor encerrado.
+2026-05-16 02:47:05.381 | INFO     | Agent.app.capture.screen_capture:start:42 - ScreenCapture iniciado – intervalo: 1s (modo privado: sem disco)
+2026-05-16 02:47:05.383 | SUCCESS  | Agent.app.guardian:start:74 - 🛡️  Guardian iniciado.
+2026-05-16 02:47:05.383 | SUCCESS  | main:lifespan:54 - ✅ HackerHero Guardian v1.0.0 rodando em http://127.0.0.1:8000
+2026-05-16 02:47:05.433 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 3ddebd53 (1920x1200)
+2026-05-16 02:47:06.310 | INFO     | Agent.app.ocr.text_extractor:_get_reader:45 - Inicializando EasyOCR (idiomas: ['pt', 'en'], GPU: False) …
+2026-05-16 02:47:09.330 | INFO     | Agent.app.ocr.text_extractor:_get_reader:55 - EasyOCR pronto.
+2026-05-16 02:47:30.038 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [3ddebd53] – 129 palavras, confiança média: 0.65
+2026-05-16 02:47:30.042 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [3ddebd53] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:47:33.012 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 830dc11b (1920x1200)
+2026-05-16 02:47:34.641 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | O trecho analisado parece ser uma conversa técnica relacionada a programação e d
+2026-05-16 02:47:34.644 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [830dc11b] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:47:41.772 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | O trecho analisado parece ser uma conversa técnica relacionada a programação e d
+2026-05-16 02:47:41.777 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [830dc11b] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:47:47.989 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | O trecho analisado parece ser uma conversa técnica relacionada a programação e d
+2026-05-16 02:47:47.992 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [830dc11b] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:47:54.950 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | O trecho analisado parece ser uma conversa técnica relacionada a programação e d
+2026-05-16 02:47:54.954 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [830dc11b] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:47:58.485 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [830dc11b] – 138 palavras, confiança média: 0.64
+2026-05-16 02:47:58.488 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [830dc11b] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:47:59.545 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 18aa8e02 (1920x1200)
+2026-05-16 02:48:02.064 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | As conversas parecem ser sobre programação e desenvolvimento de software, sem in
+2026-05-16 02:48:02.068 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [18aa8e02] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:48:08.171 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | As conversas parecem ser sobre programação e desenvolvimento de software, sem in
+2026-05-16 02:48:08.175 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [18aa8e02] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 02:48:13.744 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [18aa8e02] – 70 palavras, confiança média: 0.61
+2026-05-16 02:48:13.747 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [18aa8e02] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:48:14.462 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | As conversas parecem ser sobre programação e desenvolvimento de software, sem in
+2026-05-16 02:48:14.468 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [18aa8e02] | Score: 16 | Nível: GREEN | Sinais: 1
+2026-05-16 02:48:14.812 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: b9bc76a2 (1920x1200)
+2026-05-16 02:48:21.771 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O terceiro trecho contém uma solicitação explícita para enviar fotos nuas, o que
+2026-05-16 02:48:21.777 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b9bc76a2] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 02:48:21.778 | WARNING  | Agent.app.guardian:_create_alert:171 - 🚨 Alerta criado: 9b40602e | Padrões suspeitos detectados (score 46/100). Categorias: contato_externo. Monitoramento intensificado.
+2026-05-16 02:48:28.515 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O terceiro trecho contém uma solicitação explícita de envio de fotos nuas, o que
+2026-05-16 02:48:28.522 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b9bc76a2] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 02:48:31.497 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [b9bc76a2] – 68 palavras, confiança média: 0.62
+2026-05-16 02:48:31.499 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b9bc76a2] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:48:32.544 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 058ee1da (1920x1200)
+2026-05-16 02:48:34.790 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O trecho contém solicitações explícitas para envio de fotos nuas, o que é um com
+2026-05-16 02:48:34.802 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [058ee1da] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 02:48:41.237 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O trecho contém solicitações explícitas para envio de fotos nuas, o que é um com
+2026-05-16 02:48:41.243 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [058ee1da] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 02:48:47.707 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O trecho contém solicitações explícitas para envio de fotos nuas, o que é um com
+2026-05-16 02:48:47.713 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [058ee1da] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 02:48:49.294 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [058ee1da] – 68 palavras, confiança média: 0.64
+2026-05-16 02:48:49.296 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [058ee1da] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 02:48:50.346 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 3798d3e7 (1920x1200)
+2026-05-16 02:48:55.095 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O trecho contém solicitações explícitas para envio de fotos nuas, o que é um com
+2026-05-16 02:48:55.100 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [3798d3e7] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 02:49:02.094 | INFO     | Agent.app.capture.screen_capture:stop:55 - ScreenCapture parado.
+2026-05-16 02:49:02.094 | INFO     | Agent.app.guardian:stop:82 - Guardian parado.
+2026-05-16 02:49:02.095 | INFO     | main:lifespan:60 - Servidor encerrado.
+2026-05-16 02:49:16.673 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [3798d3e7] – 201 palavras, confiança média: 0.67
+2026-05-16 02:55:48.192 | INFO     | Agent.app.capture.screen_capture:start:42 - ScreenCapture iniciado – intervalo: 1s (modo privado: sem disco)
+2026-05-16 02:55:48.194 | SUCCESS  | Agent.app.guardian:start:75 - 🛡️  Guardian iniciado.
+2026-05-16 02:55:48.194 | SUCCESS  | main:lifespan:54 - ✅ HackerHero Guardian v1.0.0 rodando em http://127.0.0.1:8000
+2026-05-16 02:55:48.251 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 87449a7d (1920x1200)
+2026-05-16 02:55:49.158 | INFO     | Agent.app.ocr.text_extractor:_get_reader:45 - Inicializando EasyOCR (idiomas: ['pt', 'en'], GPU: False) …
+2026-05-16 02:55:52.164 | INFO     | Agent.app.ocr.text_extractor:_get_reader:55 - EasyOCR pronto.
+2026-05-16 02:56:19.717 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [87449a7d] – 168 palavras, confiança média: 0.68
+2026-05-16 02:56:19.722 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [87449a7d] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:56:20.763 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: fb470066 (1920x1200)
+2026-05-16 02:56:29.936 | INFO     | Agent.app.guardian:_ai_loop:126 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, como a menção de 'API' e 'chave', que podem 
+2026-05-16 02:56:29.940 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [fb470066] | Score: 22 | Nível: GREEN | Sinais: 0
+2026-05-16 02:56:36.287 | INFO     | Agent.app.guardian:_ai_loop:126 - 🤖 IA | Score: 20 | Nível: GREEN | O trecho analisado contém discussões técnicas sobre programação e desenvolviment
+2026-05-16 02:56:36.291 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [fb470066] | Score: 8 | Nível: GREEN | Sinais: 0
+2026-05-16 02:56:43.498 | INFO     | Agent.app.guardian:_ai_loop:126 - 🤖 IA | Score: 55 | Nível: YELLOW | O trecho apresenta linguagem técnica e referências a códigos e programação, mas 
+2026-05-16 02:56:43.502 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [fb470066] | Score: 22 | Nível: GREEN | Sinais: 0
+2026-05-16 02:56:49.637 | INFO     | Agent.app.guardian:_ai_loop:126 - 🤖 IA | Score: 20 | Nível: GREEN | O trecho analisado contém linguagem técnica relacionada a programação e desenvol
+2026-05-16 02:56:49.640 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [fb470066] | Score: 8 | Nível: GREEN | Sinais: 0
+2026-05-16 02:56:50.790 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [fb470066] – 184 palavras, confiança média: 0.67
+2026-05-16 02:56:50.795 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [fb470066] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:56:51.844 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: b7d82627 (1920x1200)
+2026-05-16 02:56:56.423 | INFO     | Agent.app.guardian:_ai_loop:126 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, como a menção de uma chave de API e a solici
+2026-05-16 02:56:56.432 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b7d82627] | Score: 22 | Nível: GREEN | Sinais: 0
+2026-05-16 02:57:03.026 | INFO     | Agent.app.guardian:_ai_loop:126 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, como a menção de uma chave de API e a solici
+2026-05-16 02:57:03.032 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b7d82627] | Score: 22 | Nível: GREEN | Sinais: 0
+2026-05-16 02:57:09.747 | INFO     | Agent.app.guardian:_ai_loop:126 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, como a menção de uma chave de API e a solici
+2026-05-16 02:57:09.755 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b7d82627] | Score: 22 | Nível: GREEN | Sinais: 0
+2026-05-16 02:57:16.718 | INFO     | Agent.app.guardian:_ai_loop:126 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, como a menção de uma chave de API e a solici
+2026-05-16 02:57:16.726 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b7d82627] | Score: 22 | Nível: GREEN | Sinais: 0
+2026-05-16 02:57:18.549 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [b7d82627] – 208 palavras, confiança média: 0.69
+2026-05-16 02:57:18.554 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b7d82627] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 02:57:19.615 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: a00805e1 (1920x1200)
+2026-05-16 02:57:23.117 | INFO     | Agent.app.guardian:_ai_loop:126 - 🤖 IA | Score: 20 | Nível: GREEN | Os trechos analisados contêm discussões técnicas sobre programação e desenvolvim
+2026-05-16 02:57:23.130 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [a00805e1] | Score: 8 | Nível: GREEN | Sinais: 0
+2026-05-16 02:57:26.529 | INFO     | Agent.app.capture.screen_capture:stop:55 - ScreenCapture parado.
+2026-05-16 02:57:26.529 | INFO     | Agent.app.guardian:stop:83 - Guardian parado.
+2026-05-16 02:57:26.530 | INFO     | main:lifespan:60 - Servidor encerrado.
+2026-05-16 02:57:44.269 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [a00805e1] – 202 palavras, confiança média: 0.70
+2026-05-16 08:40:58.244 | INFO     | Agent.app.capture.screen_capture:start:42 - ScreenCapture iniciado – intervalo: 1s (modo privado: sem disco)
+2026-05-16 08:40:58.247 | SUCCESS  | Agent.app.guardian:start:74 - 🛡️  Guardian iniciado.
+2026-05-16 08:40:58.248 | SUCCESS  | main:lifespan:54 - ✅ HackerHero Guardian v1.0.0 rodando em http://127.0.0.1:8000
+2026-05-16 08:40:58.306 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 5cc67c64 (1920x1200)
+2026-05-16 08:40:59.319 | INFO     | Agent.app.ocr.text_extractor:_get_reader:45 - Inicializando EasyOCR (idiomas: ['pt', 'en'], GPU: False) …
+2026-05-16 08:41:02.632 | INFO     | Agent.app.ocr.text_extractor:_get_reader:55 - EasyOCR pronto.
+2026-05-16 08:41:31.662 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [5cc67c64] – 136 palavras, confiança média: 0.63
+2026-05-16 08:41:31.666 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [5cc67c64] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 08:41:32.728 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 442954de (1920x1200)
+2026-05-16 08:41:42.182 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | O trecho analisado parece ser uma conversa técnica relacionada a programação e d
+2026-05-16 08:41:42.186 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [442954de] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 08:41:49.416 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | O trecho analisado parece ser uma conversa técnica relacionada a programação e d
+2026-05-16 08:41:49.419 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [442954de] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 08:41:57.787 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | A conversa parece ser técnica e relacionada a programação, sem indícios de asséd
+2026-05-16 08:41:57.790 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [442954de] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 08:42:03.505 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [442954de] – 172 palavras, confiança média: 0.63
+2026-05-16 08:42:03.510 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [442954de] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 08:42:04.579 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 8104dafc (1920x1200)
+2026-05-16 08:42:05.692 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | A conversa parece ser técnica e relacionada a programação, sem indícios de asséd
+2026-05-16 08:42:05.707 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [8104dafc] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 08:42:12.802 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | As conversas parecem ser sobre programação e desenvolvimento de software, sem in
+2026-05-16 08:42:12.813 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [8104dafc] | Score: 4 | Nível: GREEN | Sinais: 0
+2026-05-16 08:42:19.901 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [8104dafc] – 68 palavras, confiança média: 0.62
+2026-05-16 08:42:19.903 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [8104dafc] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 08:42:19.945 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 10 | Nível: GREEN | As conversas parecem ser sobre programação e desenvolvimento de software, sem in
+2026-05-16 08:42:19.953 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [8104dafc] | Score: 16 | Nível: GREEN | Sinais: 1
+2026-05-16 08:42:20.959 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 9079e26d (1920x1200)
+2026-05-16 08:42:27.067 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, como tentativas de isolamento e linguagem in
+2026-05-16 08:42:27.074 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [9079e26d] | Score: 34 | Nível: GREEN | Sinais: 1
+2026-05-16 08:42:34.592 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, como tentativas de isolamento e linguagem in
+2026-05-16 08:42:34.598 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [9079e26d] | Score: 34 | Nível: GREEN | Sinais: 1
+2026-05-16 08:42:42.751 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, como tentativas de isolamento e linguagem in
+2026-05-16 08:42:42.759 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [9079e26d] | Score: 34 | Nível: GREEN | Sinais: 1
+2026-05-16 08:42:49.818 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, como tentativas de isolamento e linguagem in
+2026-05-16 08:42:49.827 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [9079e26d] | Score: 34 | Nível: GREEN | Sinais: 1
+2026-05-16 08:42:50.721 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [9079e26d] – 200 palavras, confiança média: 0.68
+2026-05-16 08:42:50.726 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [9079e26d] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 08:42:51.789 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: bee65d09 (1920x1200)
+2026-05-16 08:42:56.745 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, como tentativas de isolamento e linguagem qu
+2026-05-16 08:42:56.754 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [bee65d09] | Score: 34 | Nível: GREEN | Sinais: 1
+2026-05-16 08:43:03.854 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, como tentativas de isolamento e linguagem qu
+2026-05-16 08:43:03.864 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [bee65d09] | Score: 34 | Nível: GREEN | Sinais: 1
+2026-05-16 08:43:06.849 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [bee65d09] – 73 palavras, confiança média: 0.66
+2026-05-16 08:43:06.851 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [bee65d09] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 08:43:07.888 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:98 - Captura em memória: 4f7a589e (1920x1200)
+2026-05-16 08:43:12.398 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, como a solicitação de fotos e conversas que 
+2026-05-16 08:43:12.405 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [4f7a589e] | Score: 34 | Nível: GREEN | Sinais: 1
+2026-05-16 08:43:14.515 | INFO     | Agent.app.capture.screen_capture:stop:55 - ScreenCapture parado.
+2026-05-16 08:43:14.516 | INFO     | Agent.app.guardian:stop:82 - Guardian parado.
+2026-05-16 08:43:14.516 | INFO     | main:lifespan:60 - Servidor encerrado.
+2026-05-16 08:43:23.023 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [4f7a589e] – 74 palavras, confiança média: 0.65
+2026-05-16 08:46:59.348 | INFO     | Agent.app.capture.screen_capture:start:40 - ScreenCapture iniciado – intervalo: 1s (modo privado: sem disco)
+2026-05-16 08:46:59.350 | SUCCESS  | Agent.app.guardian:start:74 - 🛡️  Guardian iniciado.
+2026-05-16 08:46:59.351 | SUCCESS  | main:lifespan:54 - ✅ HackerHero Guardian v1.0.0 rodando em http://127.0.0.1:8000
+2026-05-16 08:46:59.399 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: 7080f132 | 1 monitor(es) | 1920x1200
+2026-05-16 08:47:00.308 | INFO     | Agent.app.ocr.text_extractor:_get_reader:45 - Inicializando EasyOCR (idiomas: ['pt', 'en'], GPU: False) …
+2026-05-16 08:47:03.452 | INFO     | Agent.app.ocr.text_extractor:_get_reader:55 - EasyOCR pronto.
+2026-05-16 08:47:27.454 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [7080f132] – 166 palavras, confiança média: 0.66
+2026-05-16 08:47:27.457 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [7080f132] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 08:47:28.497 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: 0d077357 | 1 monitor(es) | 1920x1200
+2026-05-16 08:47:36.676 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, incluindo uma solicitação de fotos e convers
+2026-05-16 08:47:36.679 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [0d077357] | Score: 22 | Nível: GREEN | Sinais: 0
+2026-05-16 08:47:44.247 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O trecho apresenta sinais de alerta, incluindo uma solicitação de fotos e conver
+2026-05-16 08:47:44.251 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [0d077357] | Score: 22 | Nível: GREEN | Sinais: 0
+2026-05-16 08:47:51.233 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O trecho apresenta sinais de alerta, incluindo uma solicitação de fotos e conver
+2026-05-16 08:47:51.236 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [0d077357] | Score: 22 | Nível: GREEN | Sinais: 0
+2026-05-16 08:47:57.994 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [0d077357] – 165 palavras, confiança média: 0.62
+2026-05-16 08:47:57.999 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [0d077357] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 08:47:58.685 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O trecho apresenta sinais de alerta, incluindo uma solicitação de fotos e conver
+2026-05-16 08:47:58.690 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [0d077357] | Score: 22 | Nível: GREEN | Sinais: 0
+2026-05-16 08:47:59.049 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: be31f0d7 | 1 monitor(es) | 1920x1200
+2026-05-16 08:48:05.167 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, incluindo solicitações de fotos e conversas 
+2026-05-16 08:48:05.176 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [be31f0d7] | Score: 22 | Nível: GREEN | Sinais: 0
+2026-05-16 08:48:11.656 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 55 | Nível: YELLOW | O texto apresenta sinais de alerta, incluindo solicitações de fotos e conversas 
+2026-05-16 08:48:11.661 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [be31f0d7] | Score: 22 | Nível: GREEN | Sinais: 0
+2026-05-16 08:48:14.938 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [be31f0d7] – 74 palavras, confiança média: 0.64
+2026-05-16 08:48:14.940 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [be31f0d7] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 08:48:15.996 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: 83a091d0 | 1 monitor(es) | 1920x1200
+2026-05-16 08:48:18.426 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O trecho apresenta solicitações explícitas de envio de fotos, além de referência
+2026-05-16 08:48:18.435 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [83a091d0] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 08:48:18.436 | WARNING  | Agent.app.guardian:_create_alert:171 - 🚨 Alerta criado: b9409439 | Padrões suspeitos detectados (score 46/100). Categorias: contato_externo. Monitoramento intensificado.
+2026-05-16 08:48:18.917 | WARNING  | Agent.app.protection.overlay:_show_warning_border:157 - 🟡 ALERTA amarelo exibido
+2026-05-16 08:48:25.138 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O trecho apresenta solicitações explícitas de envio de fotos, além de conversas 
+2026-05-16 08:48:25.152 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [83a091d0] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 08:48:25.207 | WARNING  | Agent.app.protection.overlay:_show_warning_border:157 - 🟡 ALERTA amarelo exibido
+2026-05-16 08:48:31.819 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O trecho contém solicitações explícitas para envio de fotos, além de referências
+2026-05-16 08:48:31.828 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [83a091d0] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 08:48:31.864 | WARNING  | Agent.app.protection.overlay:_show_warning_border:157 - 🟡 ALERTA amarelo exibido
+2026-05-16 08:48:32.545 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [83a091d0] – 75 palavras, confiança média: 0.63
+2026-05-16 08:48:32.548 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [83a091d0] | Score: 12 | Nível: GREEN | Sinais: 1
+2026-05-16 08:48:33.598 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: cf4c261d | 1 monitor(es) | 1920x1200
+2026-05-16 08:48:38.726 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O trecho apresenta solicitações explícitas de fotos e conversas que sugerem enge
+2026-05-16 08:48:38.731 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [cf4c261d] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 08:48:38.757 | WARNING  | Agent.app.protection.overlay:_show_warning_border:157 - 🟡 ALERTA amarelo exibido
+2026-05-16 08:48:45.708 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O trecho apresenta solicitações explícitas de fotos e conversas que sugerem enge
+2026-05-16 08:48:45.715 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [cf4c261d] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 08:48:45.741 | WARNING  | Agent.app.protection.overlay:_show_warning_border:157 - 🟡 ALERTA amarelo exibido
+2026-05-16 08:48:45.845 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [cf4c261d] – 25 palavras, confiança média: 0.67
+2026-05-16 08:48:45.846 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [cf4c261d] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 08:48:46.899 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: cc6d6175 | 1 monitor(es) | 1920x1200
+2026-05-16 08:48:52.451 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O trecho contém solicitações explícitas de fotos e referências a conteúdo sexual
+2026-05-16 08:48:52.455 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [cc6d6175] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 08:48:52.483 | WARNING  | Agent.app.protection.overlay:_show_warning_border:157 - 🟡 ALERTA amarelo exibido
+2026-05-16 08:48:58.948 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [cc6d6175] – 24 palavras, confiança média: 0.67
+2026-05-16 08:48:58.950 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [cc6d6175] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 08:48:59.311 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O texto apresenta solicitações explícitas de fotos e conversas que sugerem asséd
+2026-05-16 08:48:59.314 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [cc6d6175] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 08:48:59.338 | WARNING  | Agent.app.protection.overlay:_show_warning_border:157 - 🟡 ALERTA amarelo exibido
+2026-05-16 08:49:00.015 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: b09b3906 | 1 monitor(es) | 1920x1200
+2026-05-16 08:49:06.326 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | Os trechos contêm solicitações de fotos e conversas que sugerem assédio sexual, 
+2026-05-16 08:49:06.329 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b09b3906] | Score: 46 | Nível: YELLOW | Sinais: 1
+2026-05-16 08:49:06.354 | WARNING  | Agent.app.protection.overlay:_show_warning_border:157 - 🟡 ALERTA amarelo exibido
+2026-05-16 08:49:11.974 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [b09b3906] – 24 palavras, confiança média: 0.67
+2026-05-16 08:49:11.975 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b09b3906] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 08:49:13.031 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: 838adae5 | 1 monitor(es) | 1920x1200
+2026-05-16 08:49:13.251 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | Os trechos contêm solicitações explícitas de fotos e conversas que sugerem asséd
+2026-05-16 08:49:13.253 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [838adae5] | Score: 34 | Nível: GREEN | Sinais: 0
+2026-05-16 08:49:20.621 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | Os trechos contêm solicitações explícitas de fotos e conversas que sugerem asséd
+2026-05-16 08:49:20.623 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [838adae5] | Score: 34 | Nível: GREEN | Sinais: 0
+2026-05-16 08:49:23.532 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [838adae5] – 25 palavras, confiança média: 0.64
+2026-05-16 08:49:23.533 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [838adae5] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 08:49:24.612 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: 5e7365a3 | 1 monitor(es) | 1920x1200
+2026-05-16 08:49:27.605 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | Os trechos contêm solicitações explícitas de fotos e referências a atividades de
+2026-05-16 08:49:27.607 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [5e7365a3] | Score: 34 | Nível: GREEN | Sinais: 0
+2026-05-16 08:49:34.382 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | Os trechos contêm solicitações explícitas de fotos e referências a atividades de
+2026-05-16 08:49:34.384 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [5e7365a3] | Score: 34 | Nível: GREEN | Sinais: 0
+2026-05-16 08:49:36.192 | INFO     | Agent.app.capture.screen_capture:stop:53 - ScreenCapture parado.
+2026-05-16 08:49:36.193 | INFO     | Agent.app.guardian:stop:82 - Guardian parado.
+2026-05-16 08:49:36.193 | INFO     | main:lifespan:60 - Servidor encerrado.
+2026-05-16 08:49:50.364 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [5e7365a3] – 194 palavras, confiança média: 0.69
+2026-05-16 09:18:25.752 | INFO     | Agent.app.capture.screen_capture:start:40 - ScreenCapture iniciado – intervalo: 1s (modo privado: sem disco)
+2026-05-16 09:18:25.902 | SUCCESS  | Agent.app.guardian:start:74 - 🛡️  Guardian iniciado.
+2026-05-16 09:18:25.902 | SUCCESS  | main:lifespan:54 - ✅ HackerHero Guardian v1.0.0 rodando em http://127.0.0.1:8000
+2026-05-16 09:18:25.983 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: b64b4304 | 1 monitor(es) | 1920x1200
+2026-05-16 09:18:27.135 | INFO     | Agent.app.ocr.text_extractor:_get_reader:45 - Inicializando EasyOCR (idiomas: ['pt', 'en'], GPU: False) …
+2026-05-16 09:18:30.719 | INFO     | Agent.app.ocr.text_extractor:_get_reader:55 - EasyOCR pronto.
+2026-05-16 09:18:48.553 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [b64b4304] – 76 palavras, confiança média: 0.67
+2026-05-16 09:18:48.555 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [b64b4304] | Score: 36 | Nível: GREEN | Sinais: 2
+2026-05-16 09:18:49.593 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: 5677d8ca | 1 monitor(es) | 1920x1200
+2026-05-16 09:18:59.140 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O trecho contém solicitações explícitas para envio de fotos nuas, o que é um com
+2026-05-16 09:18:59.143 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [5677d8ca] | Score: 70 | Nível: RED | Sinais: 2
+2026-05-16 09:18:59.145 | WARNING  | Agent.app.guardian:_create_alert:171 - 🚨 Alerta criado: 41c9c2bf | 🚨 RISCO ALTO (score 70/100). Categorias: dados_pessoais, sexual. Tela bloqueada. Responsável notificado.
+2026-05-16 09:19:00.298 | WARNING  | Agent.app.protection.overlay:_show_block_screen:268 - 🔴 BLOQUEIO ativado | 1920x1200 @ (0, 0) – 🚨 RISCO ALTO (score 70/100). Categorias: dados_pessoais, sexual. Tela bloqueada. Responsável notificado.
+2026-05-16 09:19:07.678 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [5677d8ca] – 76 palavras, confiança média: 0.67
+2026-05-16 09:19:07.681 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [5677d8ca] | Score: 48 | Nível: YELLOW | Sinais: 3
+2026-05-16 09:19:07.682 | WARNING  | Agent.app.guardian:_create_alert:171 - 🚨 Alerta criado: 8c240dd3 | Padrões suspeitos detectados (score 48/100). Categorias: contato_externo, dados_pessoais, sexual. Monitoramento intensificado.
+2026-05-16 09:19:07.701 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O trecho contém solicitações explícitas para envio de fotos nuas, o que indica c
+2026-05-16 09:19:07.704 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [5677d8ca] | Score: 82 | Nível: RED | Sinais: 3
+2026-05-16 09:19:07.705 | WARNING  | Agent.app.guardian:_create_alert:171 - 🚨 Alerta criado: 269535ea | 🚨 RISCO ALTO (score 82/100). Categorias: contato_externo, dados_pessoais, sexual. Tela bloqueada. Responsável notificado.
+2026-05-16 09:19:07.750 | WARNING  | Agent.app.protection.overlay:_show_block_screen:268 - 🔴 BLOQUEIO ativado | 1920x1200 @ (0, 0) – 🚨 RISCO ALTO (score 82/100). Categorias: contato_externo, dados_pessoais, sexual. Tela bloqueada. Responsável notificado.
+2026-05-16 09:19:08.724 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: 378a0d5d | 1 monitor(es) | 1920x1200
+2026-05-16 09:19:14.640 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O texto contém solicitações explícitas para envio de fotos nuas, o que é um comp
+2026-05-16 09:19:14.643 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [378a0d5d] | Score: 82 | Nível: RED | Sinais: 3
+2026-05-16 09:19:14.693 | WARNING  | Agent.app.protection.overlay:_show_block_screen:268 - 🔴 BLOQUEIO ativado | 1920x1200 @ (0, 0) – 🚨 RISCO ALTO (score 82/100). Categorias: contato_externo, dados_pessoais, sexual. Tela bloqueada. Responsável notificado.
+2026-05-16 09:19:20.232 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [378a0d5d] – 4 palavras, confiança média: 0.57
+2026-05-16 09:19:20.233 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [378a0d5d] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 09:19:21.292 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: 3274cf1b | 1 monitor(es) | 1920x1200
+2026-05-16 09:19:22.326 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 85 | Nível: RED | O texto contém solicitações explícitas para o envio de fotos nuas, o que é um co
+2026-05-16 09:19:22.329 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [3274cf1b] | Score: 82 | Nível: RED | Sinais: 3
+2026-05-16 09:19:22.371 | WARNING  | Agent.app.protection.overlay:_show_block_screen:268 - 🔴 BLOQUEIO ativado | 1920x1200 @ (0, 0) – 🚨 RISCO ALTO (score 82/100). Categorias: contato_externo, dados_pessoais, sexual. Tela bloqueada. Responsável notificado.
+2026-05-16 09:19:29.668 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | O texto contém solicitações explícitas para envio de fotos nuas, o que indica um
+2026-05-16 09:19:29.672 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [3274cf1b] | Score: 80 | Nível: RED | Sinais: 3
+2026-05-16 09:19:29.722 | WARNING  | Agent.app.protection.overlay:_show_block_screen:268 - 🔴 BLOQUEIO ativado | 1920x1200 @ (0, 0) – 🚨 RISCO ALTO (score 80/100). Categorias: contato_externo, dados_pessoais, sexual. Tela bloqueada. Responsável notificado.
+2026-05-16 09:19:32.950 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [3274cf1b] – 4 palavras, confiança média: 0.57
+2026-05-16 09:19:32.951 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [3274cf1b] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 09:19:34.009 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: a4cab9ad | 1 monitor(es) | 1920x1200
+2026-05-16 09:19:37.215 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Os trechos contêm solicitações explícitas para envio de fotos nuas e tentativas 
+2026-05-16 09:19:37.219 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [a4cab9ad] | Score: 80 | Nível: RED | Sinais: 3
+2026-05-16 09:19:37.309 | WARNING  | Agent.app.protection.overlay:_show_block_screen:268 - 🔴 BLOQUEIO ativado | 1920x1200 @ (0, 0) – 🚨 RISCO ALTO (score 80/100). Categorias: contato_externo, dados_pessoais, sexual. Tela bloqueada. Responsável notificado.
+2026-05-16 09:19:45.422 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Os trechos contêm solicitações explícitas para envio de fotos nuas, além de tent
+2026-05-16 09:19:45.424 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [a4cab9ad] | Score: 80 | Nível: RED | Sinais: 3
+2026-05-16 09:19:45.478 | WARNING  | Agent.app.protection.overlay:_show_block_screen:268 - 🔴 BLOQUEIO ativado | 1920x1200 @ (0, 0) – 🚨 RISCO ALTO (score 80/100). Categorias: contato_externo, dados_pessoais, sexual. Tela bloqueada. Responsável notificado.
+2026-05-16 09:19:45.680 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [a4cab9ad] – 4 palavras, confiança média: 0.56
+2026-05-16 09:19:45.681 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [a4cab9ad] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 09:19:46.741 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: 984cd1e3 | 1 monitor(es) | 1920x1200
+2026-05-16 09:19:55.051 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Os trechos contêm solicitações explícitas para envio de fotos nuas e referências
+2026-05-16 09:19:55.053 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [984cd1e3] | Score: 32 | Nível: GREEN | Sinais: 0
+2026-05-16 09:19:58.245 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [984cd1e3] – 4 palavras, confiança média: 0.56
+2026-05-16 09:19:58.246 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [984cd1e3] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 09:19:59.253 | ERROR    | Agent.app.capture.screen_capture:_capture_loop:68 - Erro na captura de tela: Windows graphics function failed: BitBlt: Access is denied.
+2026-05-16 09:20:00.272 | ERROR    | Agent.app.capture.screen_capture:_capture_loop:68 - Erro na captura de tela: Windows graphics function failed: BitBlt: Access is denied.
+2026-05-16 09:20:01.344 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: 53753c87 | 1 monitor(es) | 1920x1200
+2026-05-16 09:20:03.040 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Os trechos contêm solicitações explícitas para envio de fotos nuas e referências
+2026-05-16 09:20:03.042 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [53753c87] | Score: 32 | Nível: GREEN | Sinais: 0
+2026-05-16 09:20:09.955 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Os trechos contêm solicitações explícitas de fotos íntimas e referências a conta
+2026-05-16 09:20:09.956 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [53753c87] | Score: 32 | Nível: GREEN | Sinais: 0
+2026-05-16 09:20:12.904 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [53753c87] – 4 palavras, confiança média: 0.56
+2026-05-16 09:20:12.906 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [53753c87] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 09:20:13.972 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: 1643e7dc | 1 monitor(es) | 1920x1200
+2026-05-16 09:20:17.959 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Os trechos contêm solicitações explícitas para envio de fotos nuas, além de refe
+2026-05-16 09:20:17.960 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [1643e7dc] | Score: 32 | Nível: GREEN | Sinais: 0
+2026-05-16 09:20:24.652 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Os trechos contêm solicitações explícitas para envio de fotos nuas, além de refe
+2026-05-16 09:20:24.653 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [1643e7dc] | Score: 32 | Nível: GREEN | Sinais: 0
+2026-05-16 09:20:25.267 | DEBUG    | Agent.app.ocr.text_extractor:_extract_sync:97 - OCR [1643e7dc] – 4 palavras, confiança média: 0.56
+2026-05-16 09:20:25.269 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [1643e7dc] | Score: 0 | Nível: GREEN | Sinais: 0
+2026-05-16 09:20:26.324 | DEBUG    | Agent.app.capture.screen_capture:_take_screenshot:120 - Captura em memória: 75ecaaad | 1 monitor(es) | 1920x1200
+2026-05-16 09:20:33.026 | INFO     | Agent.app.guardian:_ai_loop:121 - 🤖 IA | Score: 82 | Nível: RED | Os trechos contêm solicitações explícitas para envio de fotos nuas, além de refe
+2026-05-16 09:20:33.027 | INFO     | Agent.app.risk.risk_engine:assess:114 - Risco [75ecaaad] | Score: 32 | Nível: GREEN | Sinais: 0

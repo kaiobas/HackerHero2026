@@ -100,7 +100,7 @@ class GuardianOrchestrator:
         assessment = self.risk_engine.assess(extracted)
         self.latest_risk = assessment
 
-        # 3. Acionar proteção imediata se necessário
+        # 3. Acionar proteção visual (overlay decide prioridade RED > YELLOW)
         if assessment.level != RiskLevel.GREEN:
             self.overlay.apply(assessment)
             await self._create_alert(assessment)

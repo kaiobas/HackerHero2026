@@ -6,20 +6,59 @@ Responsável por:
   🔴 RED    → tela vermelha com mensagem de bloqueio
 
 Privacidade: nenhuma imagem é salva. O bloqueio é puramente visual.
-Os pais são notificados apenas sobre o nível de risco — a decisão
-de verificar o que aconteceu é tomada presencialmente pelo responsável.
 """
 
 from __future__ import annotations
 
+import sys
 import threading
 from datetime import datetime
-import tkinter as tk
 
+import tkinter as tk
 from loguru import logger
 
 from Agent.config import settings
 from Agent.models.schemas import ProtectionAction, ProtectionState, RiskAssessment, RiskLevel
+
+# Espessura da borda amarela (px)
+_BORDER_THICKNESS = 16
+
+
+def _enable_windows_dpi_awareness() -> None:
+    """Evita que o Tk use tamanho lógico menor que a resolução real (Windows HiDPI)."""
+    if sys.platform != "win32":
+        return
+    try:
+        import ctypes
+
+        # PER_MONITOR_DPI_AWARE v2 (Windows 10+)
+        ctypes.windll.shcore.SetProcessDpiAwareness(2)
+    except Exception:
+        try:
+            import ctypes
+
+            ctypes.windll.user32.SetProcessDPIAware()
+        except Exception:
+            pass
+
+
+def _virtual_screen_bounds() -> tuple[int, int, int, int]:
+    """
+    Retorna (left, top, width, height) da área virtual de todos os monitores.
+    Mesma referência usada pelo mss na captura de tela.
+    """
+    try:
+        import mss
+
+        with mss.mss() as sct:
+            mon = sct.monitors[0]
+            return mon["left"], mon["top"], mon["width"], mon["height"]
+    except Exception as exc:
+        logger.debug("Fallback bounds do Tk: {}", exc)
+        root = tk._default_root
+        if root:
+            return 0, 0, root.winfo_screenwidth(), root.winfo_screenheight()
+        return 0, 0, 1920, 1080
 
 
 class OverlayProtection:
@@ -33,6 +72,7 @@ class OverlayProtection:
         self._root: tk.Tk | None = None
         self._tk_thread: threading.Thread | None = None
         self._lock = threading.Lock()
+        self._quarantine_win: tk.Toplevel | None = None
 
     # ------------------------------------------------------------------
     # Ciclo de vida
@@ -45,7 +85,7 @@ class OverlayProtection:
 
     def stop(self) -> None:
         if self._root:
-            self._root.after(0, self._root.destroy)
+            self._root.after(0, self._clear_all)
 
     # ------------------------------------------------------------------
     # Interface pública (thread-safe)
@@ -63,280 +103,147 @@ class OverlayProtection:
             )
 
         if self._root:
-            self._root.after(0, lambda: self._dispatch(action, assessment))
+            self._root.after(0, lambda a=action, r=assessment: self._dispatch(a, r))
 
     def release(self) -> None:
         """Remove qualquer proteção ativa (uso pelos pais)."""
         with self._lock:
             self._state = ProtectionState(action=ProtectionAction.UNBLOCK)
         if self._root:
-            self._root.after(0, self._clear_overlay)
+            self._root.after(0, self._clear_all)
 
     @property
     def state(self) -> ProtectionState:
         with self._lock:
             return self._state.model_copy()
 
+    def is_quarantine_active(self) -> bool:
+        """True somente se a janela de bloqueio RED existir de fato."""
+        return self._is_quarantine_visible()
+
+    # ------------------------------------------------------------------
+    # Janela fullscreen (multi-monitor + HiDPI)
+    # ------------------------------------------------------------------
+
+    def _create_fullscreen_window(self, title: str) -> tk.Toplevel:
+        """Cria Toplevel cobrindo todos os monitores com geometria correta."""
+        assert self._root is not None
+        win = tk.Toplevel(self._root)
+        win.title(title)
+        win.overrideredirect(True)
+        win.attributes("-topmost", True)
+        self._apply_screen_geometry(win)
+        return win
+
+    def _apply_screen_geometry(self, win: tk.Toplevel) -> None:
+        left, top, width, height = _virtual_screen_bounds()
+        win.geometry(f"{width}x{height}+{left}+{top}")
+        win.update_idletasks()
+
     # ------------------------------------------------------------------
     # Dispatch de ações
     # ------------------------------------------------------------------
 
     def _dispatch(self, action: ProtectionAction, assessment: RiskAssessment) -> None:
-        self._clear_overlay()
-        if action == ProtectionAction.WARN:
-            self._show_warning_border()
-        elif action in (ProtectionAction.BLUR, ProtectionAction.QUARANTINE):
-            self._show_block_screen(assessment)
+        try:
+            if action in (ProtectionAction.BLUR, ProtectionAction.QUARANTINE):
+                self._show_block_screen(assessment)
+            elif action == ProtectionAction.WARN:
+                if self._is_quarantine_visible():
+                    return
+                self._clear_warnings()
+                self._show_warning_border()
+        except Exception as exc:
+            logger.error("Erro ao aplicar overlay: {}", exc)
 
     # ------------------------------------------------------------------
     # Elementos visuais
     # ------------------------------------------------------------------
 
     def _show_warning_border(self) -> None:
-        """Borda amarela pulsante – nível YELLOW."""
+        """Borda amarela – nível YELLOW, cobre área virtual completa."""
         if not self._root:
             return
-        w = self._root.winfo_screenwidth()
-        h = self._root.winfo_screenheight()
-        thickness = 12
 
-        win = tk.Toplevel(self._root)
-        win.title("guardian_warn")
-        win.overrideredirect(True)
-        win.attributes("-topmost", True)
-        win.attributes("-transparentcolor", "black")
-        win.geometry(f"{w}x{h}+0+0")
-        win.configure(bg="black")
+        win = self._create_fullscreen_window("guardian_warn")
+        win.configure(bg="#FFD700")
 
-        canvas = tk.Canvas(win, bg="black", highlightthickness=0, width=w, height=h)
-        canvas.pack()
-        canvas.create_rectangle(0, 0, w, h, outline="#FFD700", width=thickness)
+        # Borda amarela responsiva (outer) + conteúdo (inner)
+        shell = tk.Frame(win, bg="#FFD700")
+        shell.pack(fill="both", expand=True)
 
-        label = tk.Label(
-            win,
-            text="⚠️  Atividade suspeita detectada – monitorando…",
-            fg="#FFD700", bg="#1a1a1a",
-            font=("Arial", 14, "bold"),
-            padx=16, pady=8,
+        inner = tk.Frame(shell, bg="#2a2200")
+        inner.pack(
+            fill="both",
+            expand=True,
+            padx=_BORDER_THICKNESS,
+            pady=_BORDER_THICKNESS,
         )
-        label.place(relx=0.5, rely=0.02, anchor="n")
 
-        self._root.after(8000, win.destroy)   # desaparece após 8s
+        banner = tk.Frame(inner, bg="#3d3200", bd=2, relief="ridge")
+        banner.pack(side="top", pady=24)
+
+        tk.Label(
+            banner,
+            text="⚠️  Atividade suspeita detectada – monitorando…",
+            fg="#FFD700",
+            bg="#3d3200",
+            font=("Segoe UI", 16, "bold"),
+            padx=24,
+            pady=12,
+        ).pack()
+
+        win.lift()
+        win.focus_force()
+        win.update()
+
+        left, top, w, h = _virtual_screen_bounds()
+        logger.warning("🟡 ALERTA amarelo exibido | {}x{} @ ({}, {})", w, h, left, top)
+        self._root.after(8000, lambda: self._destroy_window(win))
 
     def _show_block_screen(self, assessment: RiskAssessment) -> None:
-        """Tela vermelha com mensagem de bloqueio – nível RED."""
+        """Tela vermelha – nível RED, cobre área virtual completa."""
         if not self._root:
             return
-        w = self._root.winfo_screenwidth()
-        h = self._root.winfo_screenheight()
 
-        win = tk.Toplevel(self._root)
-        win.title("guardian_quarantine")
-        win.overrideredirect(True)
-        win.attributes("-topmost", True)
-        win.geometry(f"{w}x{h}+0+0")
-        win.configure(bg="#1a0000")
-        win.grab_set()   # captura todo input do teclado/mouse
-
-        frame = tk.Frame(win, bg="#2d0000", bd=4, relief="ridge")
-        frame.place(relx=0.5, rely=0.5, anchor="center")
-
-        tk.Label(
-            frame, text="🛑",
-            font=("Arial", 72), bg="#2d0000", fg="white",
-        ).pack(pady=(30, 0))
-
-        tk.Label(
-            frame,
-            text=settings.quarantine_message,
-            font=("Arial", 18, "bold"),
-            bg="#2d0000", fg="white",
-            wraplength=600, justify="center",
-        ).pack(padx=40, pady=20)
-
-        tk.Label(
-            frame,
-            text=f"Motivo: {assessment.explanation}",
-            font=("Arial", 12),
-            bg="#2d0000", fg="#ff9999",
-            wraplength=580, justify="center",
-        ).pack(padx=40, pady=(0, 30))
-
-        logger.warning("🔴 BLOQUEIO ativado – {}", assessment.explanation)
-
-    def _clear_overlay(self) -> None:
-        """Fecha todas as janelas de overlay."""
-        if not self._root:
-            return
-        for child in list(self._root.winfo_children()):
+        if self._is_quarantine_visible():
             try:
-                if "guardian" in child.title():
-                    child.destroy()
-            except Exception:
-                pass
+                for widget in self._quarantine_win.winfo_children():
+                    if isinstance(widget, tk.Frame):
+                        for child in widget.winfo_children():
+                            if isinstance(child, tk.Label) and child.cget("fg") == "#ff9999":
+                                child.config(text=f"Motivo: {assessment.explanation}")
+                                logger.warning("🔴 BLOQUEIO atualizado – {}", assessment.explanation)
+                                return
+            except tk.TclError:
+                self._quarantine_win = None
 
-    # ------------------------------------------------------------------
-    # Thread Tkinter
-    # ------------------------------------------------------------------
+        self._clear_warnings()
 
-    def _tk_main(self) -> None:
-        self._root = tk.Tk()
-        self._root.withdraw()   # janela raiz invisível
-        self._root.mainloop()
-
-    # ------------------------------------------------------------------
-    # Helpers
-    # ------------------------------------------------------------------
-
-    @staticmethod
-    def _level_to_action(level: RiskLevel) -> ProtectionAction:
-        return {
-            RiskLevel.GREEN:  ProtectionAction.NONE,
-            RiskLevel.YELLOW: ProtectionAction.WARN,
-            RiskLevel.RED:    ProtectionAction.QUARANTINE,
-        }[level]
-
-
-
-class OverlayProtection:
-    """
-    Gerencia o overlay de proteção na tela.
-    Toda interação com Tkinter ocorre na thread dedicada `_tk_thread`.
-    """
-
-    def __init__(self) -> None:
-        self._state = ProtectionState()
-        self._root: tk.Tk | None = None
-        self._tk_thread: threading.Thread | None = None
-        self._lock = threading.Lock()
-
-    # ------------------------------------------------------------------
-    # Ciclo de vida
-    # ------------------------------------------------------------------
-
-    def start(self) -> None:
-        """Inicia a thread Tkinter em background (não bloqueante)."""
-        self._tk_thread = threading.Thread(target=self._tk_main, daemon=True)
-        self._tk_thread.start()
-
-    def stop(self) -> None:
-        if self._root:
-            self._root.after(0, self._root.destroy)
-
-    # ------------------------------------------------------------------
-    # Interface pública (thread-safe)
-    # ------------------------------------------------------------------
-
-    def apply(self, assessment: RiskAssessment) -> None:
-        """Aplica a proteção baseada no nível de risco."""
-        action = self._level_to_action(assessment.level)
-        with self._lock:
-            self._state = ProtectionState(
-                active=action != ProtectionAction.NONE,
-                action=action,
-                triggered_at=datetime.utcnow(),
-                reason=assessment.explanation,
-            )
-
-        if self._root:
-            self._root.after(0, lambda: self._dispatch(action, assessment))
-
-    def release(self) -> None:
-        """Remove qualquer proteção ativa (uso pelos pais)."""
-        with self._lock:
-            self._state = ProtectionState(action=ProtectionAction.UNBLOCK)
-        if self._root:
-            self._root.after(0, self._clear_overlay)
-
-    @property
-    def state(self) -> ProtectionState:
-        with self._lock:
-            return self._state.model_copy()
-
-    # ------------------------------------------------------------------
-    # Dispatch de ações
-    # ------------------------------------------------------------------
-
-    def _dispatch(self, action: ProtectionAction, assessment: RiskAssessment) -> None:
-        self._clear_overlay()
-        if action == ProtectionAction.WARN:
-            self._show_warning_border()
-        elif action in (ProtectionAction.BLUR, ProtectionAction.QUARANTINE):
-            self._show_quarantine_screen(assessment)
-            if action == ProtectionAction.QUARANTINE:
-                self._move_to_quarantine(assessment.screenshot_id)
-
-    # ------------------------------------------------------------------
-    # Elementos visuais
-    # ------------------------------------------------------------------
-
-    def _show_warning_border(self) -> None:
-        """Borda amarela pulsante – nível YELLOW."""
-        if not self._root:
-            return
-        w = self._root.winfo_screenwidth()
-        h = self._root.winfo_screenheight()
-        thickness = 12
-
-        win = tk.Toplevel(self._root)
-        win.title("guardian_warn")
-        win.overrideredirect(True)
-        win.attributes("-topmost", True)
-        win.attributes("-transparentcolor", "black")
-        win.geometry(f"{w}x{h}+0+0")
-        win.configure(bg="black")
-
-        canvas = tk.Canvas(win, bg="black", highlightthickness=0, width=w, height=h)
-        canvas.pack()
-
-        # Borda amarela
-        canvas.create_rectangle(
-            0, 0, w, h,
-            outline="#FFD700", width=thickness
-        )
-
-        label = tk.Label(
-            win,
-            text="⚠️  Atividade suspeita detectada – monitorando…",
-            fg="#FFD700", bg="#1a1a1a",
-            font=("Arial", 14, "bold"),
-            padx=16, pady=8,
-        )
-        label.place(relx=0.5, rely=0.02, anchor="n")
-
-        self._root.after(8000, win.destroy)   # desaparece após 8s
-
-    def _show_quarantine_screen(self, assessment: RiskAssessment) -> None:
-        """Tela vermelha com desfoque e mensagem de bloqueio – nível RED."""
-        if not self._root:
-            return
-        w = self._root.winfo_screenwidth()
-        h = self._root.winfo_screenheight()
-
-        win = tk.Toplevel(self._root)
-        win.title("guardian_quarantine")
-        win.overrideredirect(True)
-        win.attributes("-topmost", True)
-        win.geometry(f"{w}x{h}+0+0")
+        win = self._create_fullscreen_window("guardian_quarantine")
         win.configure(bg="#1a0000")
-        win.grab_set()   # captura todo input do teclado/mouse
 
-        # Painel central
-        frame = tk.Frame(win, bg="#2d0000", bd=4, relief="ridge")
+        # Fundo vermelho em tela cheia (responsivo)
+        bg = tk.Frame(win, bg="#1a0000")
+        bg.pack(fill="both", expand=True)
+
+        frame = tk.Frame(bg, bg="#2d0000", bd=4, relief="ridge")
         frame.place(relx=0.5, rely=0.5, anchor="center")
 
         tk.Label(
             frame,
             text="🛑",
-            font=("Arial", 72),
-            bg="#2d0000", fg="white",
+            font=("Segoe UI", 72),
+            bg="#2d0000",
+            fg="white",
         ).pack(pady=(30, 0))
 
         tk.Label(
             frame,
             text=settings.quarantine_message,
-            font=("Arial", 18, "bold"),
-            bg="#2d0000", fg="white",
+            font=("Segoe UI", 18, "bold"),
+            bg="#2d0000",
+            fg="white",
             wraplength=600,
             justify="center",
         ).pack(padx=40, pady=20)
@@ -344,65 +251,79 @@ class OverlayProtection:
         tk.Label(
             frame,
             text=f"Motivo: {assessment.explanation}",
-            font=("Arial", 12),
-            bg="#2d0000", fg="#ff9999",
+            font=("Segoe UI", 12),
+            bg="#2d0000",
+            fg="#ff9999",
             wraplength=580,
             justify="center",
         ).pack(padx=40, pady=(0, 30))
 
-        logger.warning("🔴 QUARENTENA ativada – {}", assessment.explanation)
+        win.grab_set()
+        win.lift()
+        win.focus_force()
+        win.update()
 
-    def _clear_overlay(self) -> None:
-        """Fecha todas as janelas de overlay."""
+        left, top, w, h = _virtual_screen_bounds()
+        self._quarantine_win = win
+        logger.warning("🔴 BLOQUEIO ativado | {}x{} @ ({}, {}) – {}", w, h, left, top, assessment.explanation)
+
+    def _is_quarantine_visible(self) -> bool:
+        if self._quarantine_win is None:
+            return False
+        try:
+            return bool(self._quarantine_win.winfo_exists())
+        except tk.TclError:
+            self._quarantine_win = None
+            return False
+
+    def _destroy_window(self, win: tk.Toplevel) -> None:
+        """Destrói janela liberando grab antes (crítico no Windows)."""
+        if not win:
+            return
+        try:
+            if win.winfo_exists():
+                try:
+                    win.grab_release()
+                except tk.TclError:
+                    pass
+                win.destroy()
+        except tk.TclError:
+            pass
+        if win is self._quarantine_win:
+            self._quarantine_win = None
+
+    def _clear_warnings(self) -> None:
+        """Remove apenas janelas de aviso amarelo."""
         if not self._root:
             return
-        for child in self._root.winfo_children():
-            title = child.winfo_name() if hasattr(child, "winfo_name") else ""
+        for child in list(self._root.winfo_children()):
             try:
-                if "guardian" in child.title():
-                    child.destroy()
+                if child.title() == "guardian_warn":
+                    self._destroy_window(child)
             except Exception:
                 pass
 
-    # ------------------------------------------------------------------
-    # Quarentena de arquivos
-    # ------------------------------------------------------------------
-
-    @staticmethod
-    def _move_to_quarantine(screenshot_id: str) -> None:
-        """Move screenshot para pasta de quarentena."""
-        src_dir = settings.screenshot_dir
-        for f in src_dir.glob(f"*{screenshot_id[:8]}*.png"):
-            dest = QUARANTINE_DIR / f.name
-            shutil.move(str(f), str(dest))
-            logger.info("Screenshot movido para quarentena: {}", f.name)
+    def _clear_all(self) -> None:
+        """Remove todas as janelas de overlay (release / shutdown)."""
+        if not self._root:
+            return
+        for child in list(self._root.winfo_children()):
+            try:
+                if "guardian" in child.title():
+                    self._destroy_window(child)
+            except Exception:
+                pass
+        self._quarantine_win = None
 
     # ------------------------------------------------------------------
     # Thread Tkinter
     # ------------------------------------------------------------------
 
     def _tk_main(self) -> None:
+        _enable_windows_dpi_awareness()
         self._root = tk.Tk()
-        self._root.withdraw()   # janela raiz invisível
+        self._root.withdraw()
         self._root.mainloop()
-
-    # ------------------------------------------------------------------
-    # Utilitário estático: blur de imagem
-    # ------------------------------------------------------------------
-
-    @staticmethod
-    def blur_image(filepath: str, strength: int | None = None) -> str:
-        """
-        Aplica blur gaussiano em uma imagem e salva uma versão borrada.
-        Retorna o caminho da imagem borrada.
-        """
-        strength = strength or settings.blur_strength
-        src = Path(filepath)
-        dest = src.with_name(f"{src.stem}_blurred{src.suffix}")
-        img = Image.open(src)
-        blurred = img.filter(ImageFilter.GaussianBlur(radius=strength))
-        blurred.save(str(dest))
-        return str(dest)
 
     # ------------------------------------------------------------------
     # Helpers
@@ -411,7 +332,7 @@ class OverlayProtection:
     @staticmethod
     def _level_to_action(level: RiskLevel) -> ProtectionAction:
         return {
-            RiskLevel.GREEN:  ProtectionAction.NONE,
+            RiskLevel.GREEN: ProtectionAction.NONE,
             RiskLevel.YELLOW: ProtectionAction.WARN,
-            RiskLevel.RED:    ProtectionAction.QUARANTINE,
+            RiskLevel.RED: ProtectionAction.QUARANTINE,
         }[level]
