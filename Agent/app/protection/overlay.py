@@ -8,42 +8,69 @@ Responsável por:
 Privacidade: nenhuma imagem é salva. O bloqueio é puramente visual.
 Os pais são notificados apenas sobre o nível de risco — a decisão
 de verificar o que aconteceu é tomada presencialmente pelo responsável.
+
+Compatibilidade:
+  - Windows: Tkinter roda normalmente em thread separada.
+  - macOS:   NSWindow exige a main thread. Neste SO o overlay é
+             desabilitado (app é destinado ao Windows em produção).
+             Os alertas ainda são gerados e a API funciona normalmente.
 """
 
 from __future__ import annotations
 
+import platform
 import threading
 from datetime import datetime
-import tkinter as tk
 
 from loguru import logger
 
 from config import settings
 from models.schemas import ProtectionAction, ProtectionState, RiskAssessment, RiskLevel
 
+_IS_WINDOWS = platform.system() == "Windows"
+
+# Só importa tkinter no Windows para não crashar no macOS
+if _IS_WINDOWS:
+    import tkinter as tk
+
 
 class OverlayProtection:
     """
     Gerencia o overlay de proteção na tela.
-    Toda interação com Tkinter ocorre na thread dedicada `_tk_thread`.
+
+    No Windows: Tkinter em thread dedicada com janelas de alerta visuais.
+    No macOS/Linux: modo silencioso — apenas loga e atualiza o estado
+                    (overlay visual não disponível fora do Windows).
     """
 
     def __init__(self) -> None:
         self._state = ProtectionState()
-        self._root: tk.Tk | None = None
+        self._root = None
         self._tk_thread: threading.Thread | None = None
         self._lock = threading.Lock()
+
+        if not _IS_WINDOWS:
+            logger.warning(
+                "OverlayProtection: sistema '{}' detectado. "
+                "Overlay visual disponível apenas no Windows. "
+                "Alertas serão registrados normalmente.",
+                platform.system(),
+            )
 
     # ------------------------------------------------------------------
     # Ciclo de vida
     # ------------------------------------------------------------------
 
     def start(self) -> None:
-        """Inicia a thread Tkinter em background (não bloqueante)."""
+        """Inicia o overlay. No Windows sobe thread Tkinter; em outros SO é no-op."""
+        if not _IS_WINDOWS:
+            return
         self._tk_thread = threading.Thread(target=self._tk_main, daemon=True)
         self._tk_thread.start()
 
     def stop(self) -> None:
+        if not _IS_WINDOWS:
+            return
         if self._root:
             self._root.after(0, self._root.destroy)
 
@@ -62,6 +89,11 @@ class OverlayProtection:
                 reason=assessment.explanation,
             )
 
+        if not _IS_WINDOWS:
+            logger.warning("🔒 [{}] {} — {}", assessment.level.value.upper(),
+                           action.value, assessment.explanation[:80])
+            return
+
         if self._root:
             self._root.after(0, lambda: self._dispatch(action, assessment))
 
@@ -69,6 +101,8 @@ class OverlayProtection:
         """Remove qualquer proteção ativa (uso pelos pais)."""
         with self._lock:
             self._state = ProtectionState(action=ProtectionAction.UNBLOCK)
+        if not _IS_WINDOWS:
+            return
         if self._root:
             self._root.after(0, self._clear_overlay)
 
@@ -180,6 +214,8 @@ class OverlayProtection:
     # ------------------------------------------------------------------
 
     def _tk_main(self) -> None:
+        if not _IS_WINDOWS:
+            return
         self._root = tk.Tk()
         self._root.withdraw()   # janela raiz invisível
         self._root.mainloop()
@@ -382,6 +418,8 @@ class OverlayProtection:
     # ------------------------------------------------------------------
 
     def _tk_main(self) -> None:
+        if not _IS_WINDOWS:
+            return
         self._root = tk.Tk()
         self._root.withdraw()   # janela raiz invisível
         self._root.mainloop()

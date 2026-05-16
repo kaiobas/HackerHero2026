@@ -1,19 +1,28 @@
 """
-Motor de Risco – Semáforo de Proteção
+Camada 1 – Filtro Rápido de Risco
 
-Classifica o risco de cada texto extraído em três níveis:
-  🟢 GREEN  – sem risco detectado
-  🟡 YELLOW – conversa suspeita / alerta
-  🔴 RED    – risco alto, acionar proteção imediata
+Analisa o texto extraído via regex/léxico nas 5 categorias de alerta
+definidas para detecção de grooming online:
 
-A pontuação é calculada combinando:
-  1. Correspondência de palavras-chave categorizadas (léxico estático)
-  2. Pontuação do Agente de IA (quando disponível)
+  1. pedido_segredo   – pedir para não contar, "só entre nós", etc.
+  2. envio_midia      – solicitar fotos, vídeos, selfies
+  3. diferenca_etaria – perguntar idade, comentar ser mais velho/novo
+  4. insistencia      – pressão repetida, "vai", "por favor", "só dessa vez"
+  5. manipulacao      – ameaças, chantagem, coerção, elogios excessivos
+
+Retorna:
+  - suspicious: bool  → True se qualquer sinal for encontrado
+  - signals: list     → sinais específicos detectados
+  - score: int        → pontuação bruta (0-100) para combinar com Camada 2
+
+Se não houver sinais (suspicious=False), o pipeline para aqui.
+A IA (Camada 2) só é chamada quando suspicious=True.
 """
 
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass, field
 from datetime import datetime
 
 from loguru import logger
@@ -27,110 +36,175 @@ from models.schemas import (
 )
 
 # ---------------------------------------------------------------------------
-# Léxico de palavras-chave por categoria e peso
+# Léxico Camada 1 — 5 categorias de alerta
 # ---------------------------------------------------------------------------
-# Pesos: 1-3 = baixo, 4-6 = médio, 7-10 = alto
-# Categorias seguem o modelo de grooming online (UNESCO / SaferNet)
 
-KEYWORD_LEXICON: list[dict] = [
-    # --- Grooming / aproximação ---
-    {"pattern": r"\b(oi|olá|ei)\b.*\b(sozinho|sozinha)\b",  "category": "grooming",         "weight": 5},
-    {"pattern": r"\b(quantos anos|sua idade|como old are you)\b",  "category": "grooming",   "weight": 6},
-    {"pattern": r"\b(não conta|segredo|entre nós|só nós dois)\b",  "category": "grooming",   "weight": 8},
-    {"pattern": r"\b(encontrar|se encontrar|te ver pessoalmente)\b","category": "encontro",  "weight": 9},
-    {"pattern": r"\b(manda foto|me envia foto|foto tua|selfie)\b",  "category": "grooming",  "weight": 8},
-    {"pattern": r"\b(gosto de você|te amo|namorad[oa])\b",          "category": "grooming",  "weight": 5},
+LAYER1_LEXICON: list[dict] = [
 
-    # --- Contato pessoal / fora da plataforma ---
-    {"pattern": r"\b(whatsapp|telegram|discord|instagram|snapchat)\b","category": "contato_externo","weight": 6},
-    {"pattern": r"\b(meu número|meu cel|meu telefone|me add)\b",     "category": "contato_externo","weight": 7},
+    # ── 1. PEDIDO DE SEGREDO ──────────────────────────────────────────
+    {"pattern": r"\b(n[aã]o conta|segredo|s[oó] n[oó]s|entre n[oó]s|n[aã]o fala pra ningu[eé]m)\b",
+     "category": "pedido_segredo", "weight": 8},
+    {"pattern": r"\b(n[aã]o diz pra|n[aã]o fala pra|mant[eé]m segredo|guarda segredo)\b",
+     "category": "pedido_segredo", "weight": 8},
+    {"pattern": r"\b(keep (it )?secret|don[''']?t tell|just between us|our secret)\b",
+     "category": "pedido_segredo", "weight": 8},
 
-    # --- Conteúdo sexual explícito ---
-    {"pattern": r"\b(nude|pelad[oa]|sexo|transar|ficar)\b",         "category": "sexual",    "weight": 10},
-    {"pattern": r"\b(porn[oô]|xcam|webcam|strip)\b",                "category": "sexual",    "weight": 10},
-    {"pattern": r"\b(ped[oô]|menor|criança.*(sexo|foto))\b",        "category": "sexual",    "weight": 10},
+    # ── 2. ENVIO DE MÍDIA ─────────────────────────────────────────────
+    {"pattern": r"\b(manda (uma )?foto|me (envia|manda) (foto|pic|imagem|v[ií]deo))\b",
+     "category": "envio_midia", "weight": 9},
+    {"pattern": r"\b(selfie|nude|pelad[oa]|sem roupa|tira (uma )?foto)\b",
+     "category": "envio_midia", "weight": 10},
+    {"pattern": r"\b(send (me )?(a )?(pic|photo|picture|video|nude)|show me)\b",
+     "category": "envio_midia", "weight": 9},
+    {"pattern": r"\b(c[aâ]mera|ativa (a )?cam|liga (a )?webcam|me mostra)\b",
+     "category": "envio_midia", "weight": 8},
 
-    # --- Ameaça / extorsão ---
-    {"pattern": r"\b(vou te machucar|vou te achar|sei onde você mora)\b","category": "ameaça","weight": 10},
-    {"pattern": r"\b(chantagem|vai se arrepender|te denuncio)\b",   "category": "ameaça",    "weight": 9},
-    {"pattern": r"\b(se não fizer|se não mandar)\b",                "category": "coerção",   "weight": 8},
+    # ── 3. DIFERENÇA ETÁRIA ───────────────────────────────────────────
+    {"pattern": r"\b(quantos anos (voc[eê] tem|vc tem)|qual (é |e )?sua idade|how old are you)\b",
+     "category": "diferenca_etaria", "weight": 6},
+    {"pattern": r"\b(sou mais velho|tenho \d{2} anos|eu tenho \d+ e voc[eê])\b",
+     "category": "diferenca_etaria", "weight": 7},
+    {"pattern": r"\b(menor de idade|[eé] de menor|voc[eê] [eé] novo|you[''']?re young|you[''']?re a kid)\b",
+     "category": "diferenca_etaria", "weight": 7},
 
-    # --- Bullying / assédio ---
-    {"pattern": r"\b(idiota|imbecil|lixo|inútil|sua mãe)\b",       "category": "bullying",  "weight": 4},
-    {"pattern": r"\b(se mata|se matar|vai morrer)\b",               "category": "violência", "weight": 10},
-    {"pattern": r"\b(feio|feia|gordo|gorda|lerdo)\b",               "category": "bullying",  "weight": 3},
+    # ── 4. INSISTÊNCIA ────────────────────────────────────────────────
+    {"pattern": r"\b(s[oó] (dessa|uma) vez|vai l[aá]|vamos l[aá]|pfv|plz|please)\b",
+     "category": "insistencia", "weight": 4},
+    {"pattern": r"\b(t[eê] imploro|eu preciso|[eé] s[oó] isso|n[aã]o custa nada)\b",
+     "category": "insistencia", "weight": 6},
+    {"pattern": r"\b(faz isso pra mim|me ajuda nisso|n[aã]o [eé] nada demais)\b",
+     "category": "insistencia", "weight": 5},
+    {"pattern": r"\b(just (do it|this once|one time)|come on|don[''']?t be shy)\b",
+     "category": "insistencia", "weight": 5},
 
-    # --- Informações pessoais (tentativa de coleta) ---
-    {"pattern": r"\b(qual.*escola|onde.*mora|seu endereço)\b",      "category": "dados_pessoais","weight": 8},
-    {"pattern": r"\b(nome completo|cpf|senha)\b",                   "category": "dados_pessoais","weight": 9},
+    # ── 5. MANIPULAÇÃO ───────────────────────────────────────────────
+    {"pattern": r"\b(te amo|gosto muito de voc[eê]|voc[eê] [eé] especial|minha namorad[oa])\b",
+     "category": "manipulacao", "weight": 6},
+    {"pattern": r"\b(vou te dar|te pago|te presentei|te d[aã]o (gift|skin|item|v-bucks|robux))\b",
+     "category": "manipulacao", "weight": 7},
+    {"pattern": r"\b(se n[aã]o (fizer|mandar)|vou contar pra|vou te denunciar|vou postar)\b",
+     "category": "manipulacao", "weight": 9},
+    {"pattern": r"\b(s[oó] voc[eê] me entende|seus pais n[aã]o entendem|eles n[aã]o precisam saber)\b",
+     "category": "manipulacao", "weight": 8},
+    {"pattern": r"\b(i love you|you[''']?re special|i[''']?ll give you|i[''']?ll buy you)\b",
+     "category": "manipulacao", "weight": 6},
+    {"pattern": r"\b(if you don[''']?t|i[''']?ll tell everyone|i[''']?ll post it)\b",
+     "category": "manipulacao", "weight": 9},
 ]
 
-# Pré-compila os padrões regex
-_COMPILED: list[tuple[re.Pattern, str, int]] = [
-    (re.compile(entry["pattern"], re.IGNORECASE | re.DOTALL), entry["category"], entry["weight"])
-    for entry in KEYWORD_LEXICON
+# Pré-compila
+_COMPILED_L1: list[tuple[re.Pattern, str, int]] = [
+    (re.compile(e["pattern"], re.IGNORECASE | re.DOTALL), e["category"], e["weight"])
+    for e in LAYER1_LEXICON
 ]
 
 
 # ---------------------------------------------------------------------------
-# Motor de Risco
+# Resultado da Camada 1
 # ---------------------------------------------------------------------------
 
-class RiskEngine:
-    """Avalia o nível de risco de um texto extraído."""
+@dataclass
+class Layer1Result:
+    suspicious: bool
+    signals: list[RiskSignal] = field(default_factory=list)
+    raw_score: int = 0
+    categories_hit: set[str] = field(default_factory=set)
 
-    def assess(self, extracted: ExtractedText, ai_score: int = 0) -> RiskAssessment:
-        """
-        Calcula a pontuação de risco combinando léxico + pontuação da IA.
 
-        Args:
-            extracted: Texto extraído pelo módulo OCR.
-            ai_score:  Pontuação (0-100) retornada pelo Agente de IA (opcional).
+# ---------------------------------------------------------------------------
+# Camada 1
+# ---------------------------------------------------------------------------
 
-        Returns:
-            RiskAssessment com nível semáforo, sinais detectados e explicação.
-        """
-        text = extracted.raw_text
+class Layer1Filter:
+    """Filtro rápido léxico — Camada 1 do pipeline de detecção."""
+
+    def run(self, text: str) -> Layer1Result:
+        if not text.strip():
+            return Layer1Result(suspicious=False)
+
         signals: list[RiskSignal] = []
         total_weight = 0
 
-        for pattern, category, weight in _COMPILED:
+        for pattern, category, weight in _COMPILED_L1:
             if pattern.search(text):
-                signal = RiskSignal(keyword=pattern.pattern, category=category, weight=weight)
-                signals.append(signal)
+                signals.append(RiskSignal(
+                    keyword=pattern.pattern,
+                    category=category,
+                    weight=weight,
+                ))
                 total_weight += weight
 
-        # Pontuação léxica normalizada (0-100)
-        # Assume que 30+ pontos de peso bruto = score 100
-        lexicon_score = min(int(total_weight / 30 * 100), 100)
+        if not signals:
+            return Layer1Result(suspicious=False)
 
-        # Combina léxico (60%) com IA (40%)
-        combined_score = int(lexicon_score * 0.6 + ai_score * 0.4)
-
-        level = self._score_to_level(combined_score)
-
-        explanation = self._build_explanation(level, signals, combined_score)
+        categories_hit = {s.category for s in signals}
+        raw_score = min(int(total_weight / 25 * 100), 100)
 
         logger.info(
-            "Risco [{}] | Score: {} | Nível: {} | Sinais: {}",
+            "⚡ Camada 1 — SUSPEITO | Score: {} | Categorias: {}",
+            raw_score,
+            ", ".join(sorted(categories_hit)),
+        )
+
+        return Layer1Result(
+            suspicious=True,
+            signals=signals,
+            raw_score=raw_score,
+            categories_hit=categories_hit,
+        )
+
+
+# ---------------------------------------------------------------------------
+# Motor de Risco — combina Camada 1 + resultado da IA (Camada 2)
+# ---------------------------------------------------------------------------
+
+class RiskEngine:
+    """
+    Avalia o risco final combinando o score da Camada 1 com o da IA.
+    Só deve ser chamado após a Camada 1 retornar suspicious=True.
+    """
+
+    _filter = Layer1Filter()
+
+    def run_layer1(self, text: str) -> Layer1Result:
+        """Executa apenas a Camada 1. Use para decidir se aciona a IA."""
+        return self._filter.run(text)
+
+    def assess(self, extracted: ExtractedText, ai_score: int = 0,
+               layer1: Layer1Result | None = None) -> RiskAssessment:
+        if layer1 is None:
+            layer1 = self._filter.run(extracted.raw_text)
+
+        if not layer1.suspicious and ai_score == 0:
+            return RiskAssessment(
+                screenshot_id=extracted.screenshot_id,
+                level=RiskLevel.GREEN,
+                score=0,
+                signals=[],
+                assessed_at=datetime.utcnow(),
+                explanation="Nenhum padrão suspeito detectado.",
+            )
+
+        # 60% Camada 1 + 40% IA
+        combined_score = int(layer1.raw_score * 0.6 + ai_score * 0.4)
+        level = self._score_to_level(combined_score)
+        explanation = self._build_explanation(level, layer1, combined_score)
+
+        logger.info(
+            "🎯 Risco final [{}] | L1: {} | IA: {} | Combined: {} | {}",
             extracted.screenshot_id[:8],
-            combined_score,
+            layer1.raw_score, ai_score, combined_score,
             level.value.upper(),
-            len(signals),
         )
 
         return RiskAssessment(
             screenshot_id=extracted.screenshot_id,
             level=level,
             score=combined_score,
-            signals=signals,
+            signals=layer1.signals,
             assessed_at=datetime.utcnow(),
             explanation=explanation,
         )
-
-    # ------------------------------------------------------------------
-    # Helpers
-    # ------------------------------------------------------------------
 
     @staticmethod
     def _score_to_level(score: int) -> RiskLevel:
@@ -141,20 +215,12 @@ class RiskEngine:
         return RiskLevel.GREEN
 
     @staticmethod
-    def _build_explanation(level: RiskLevel, signals: list[RiskSignal], score: int) -> str:
+    def _build_explanation(level: RiskLevel, layer1: Layer1Result, score: int) -> str:
+        cats = ", ".join(sorted(layer1.categories_hit))
         if level == RiskLevel.GREEN:
-            return "Nenhum padrão suspeito detectado."
-
-        categories = list({s.category for s in signals})
-        cat_str = ", ".join(categories)
-
+            return "Nenhum padrão suspeito confirmado."
         if level == RiskLevel.YELLOW:
-            return (
-                f"Padrões suspeitos detectados (score {score}/100). "
-                f"Categorias: {cat_str}. Monitoramento intensificado."
-            )
-
-        return (
-            f"🚨 RISCO ALTO (score {score}/100). Categorias: {cat_str}. "
-            "Tela bloqueada. Responsável notificado."
-        )
+            return (f"⚠️ Padrões suspeitos detectados (score {score}/100). "
+                    f"Categorias: {cats}.")
+        return (f"🚨 RISCO ALTO (score {score}/100). "
+                f"Categorias: {cats}. Tela bloqueada.")
